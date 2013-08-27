@@ -12,4 +12,37 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap.min
+var flashTimer;
+$(document).ready(function(){
+  $(".back-to-top").hide();
+  $('.dropdown-toggle').dropdown();
+  $("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
+  console.log("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']");
+  var offset = 280, duration = 500;
+  $(window).scroll(function() {
+    $(this).scrollTop() > offset ? $('.back-to-top').fadeIn(duration) : $('.back-to-top').fadeOut(duration);
+  });
+  $('.back-to-top').click(function(event) {
+    $('html, body').animate({scrollTop: 0}, duration);
+  });
+  hideFlash();
+});
+function toggleDoms(show, hide){
+  show.show();
+  hide.hide();
+}
+function displayFlash(message, type){
+  var flash = "<div class='alert fade in " + type + "'><button data-dismiss='alert' class='close'>×</button>"
+  flash += message + "</div>";
+  $("div.alert").remove();
+  $('#contentBody').prepend(flash);
+  hideFlash();
+}
+function hideFlash(){
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(function() {
+    if (! $(".alert").hasClass("alert-error"))
+      $(".alert").remove();
+  }, 6000);
+}

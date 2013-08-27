@@ -1,0 +1,57 @@
+<%- content_for :title, "Sign in" %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {role: "form", class: "form-horizontal"}) do |f| %>
+    <legend style='align: center;'>Sign in</legend>
+    <div class="form-group">
+      <%= f.label :login, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :login, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+    <% if devise_mapping.rememberable? -%>
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :remember_me %> Stay signed in
+            </label>
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <button type="submit" class="pull-left btn btn-primary formSubmit">Sign in</button>
+        <img src="/assets/loader.gif" class="pull-left formLoader dn"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+      <a href="/users/password/new">Forgot your password?</a>
+      </div>
+    </div>
+<% end %>
+<%- content_for :js do %>
+  <script type="text/javascript">
+  $("#new_user").bind("submit", function(){
+    if($.trim($("#user_login").val()) == ""){
+      displayFlash("Please enter login detail", 'alert-error');
+      return false;
+    }
+    // else if(!(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test($("#user_email").val())){
+    //   displayFlash("Please enter valid email", 'alert-error');
+    //   return false;
+    // }
+    else if ($("#user_password").val() == ""){
+      displayFlash("Please enter password", 'alert-error');
+      return false;
+    }
+    toggleDoms($(".formLoader"), $(".formSubmit"));
+  });
+  </script>
+<% end %>

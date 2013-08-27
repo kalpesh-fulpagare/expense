@@ -1,4 +1,29 @@
 RailsApp::Application.routes.draw do
+  resources :groups
+
+
+  authenticated :user do
+    root to: "dashboards#show"
+  end
+  devise_for :users
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
+  resources :expenses
+  resources :categories
+  resources :users
+  resource :dashboard
+
+
+  # devise_for :users
+  # # Devise Routes
+  # authenticated :user do
+  #   root to: "users#index"
+  # end
+  # devise_scope :user do
+  #   root to: "devise/sessions#new"
+  # end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
