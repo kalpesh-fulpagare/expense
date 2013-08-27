@@ -47,4 +47,3 @@ gem 'strong_parameters', "0.2.1"
 
 # This needs to be installed so we can run Rails console on OpenShift directly
 gem 'minitest'
-ruby "1.9.3"
