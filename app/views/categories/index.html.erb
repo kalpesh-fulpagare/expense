@@ -1,38 +1,30 @@
-<%- model_class = Category -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h3>Categories</h3>
 </div>
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>id</th>
+      <th>Name</th>
+      <% if current_user.is_admin %>
+        <th>Actions</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= link_to category.id, category_path(category) %></td>
+        <td><%= link_to category.id, edit_category_path(category) %></td>
         <td><%= category.name %></td>
-        <td><%= category.user_id %></td>
-        <td><%=l category.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_category_path(category), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      category_path(category),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
+        <% if current_user.is_admin %>
+          <td>
+            <a href="/categories/<%= category.id %>/edit" class="btn-default btn btn-sm">Edit</a>
+            <a href="/categories/<%= category.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_category_path,
-            :class => 'btn btn-primary' %>
+<a href="/categories/new" class="btn btn-sm btn-primary">New</a>

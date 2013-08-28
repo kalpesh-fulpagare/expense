@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
-  before_filter :require_admin!
+  before_filter :require_admin!, except: [:new, :create]
   before_filter :find_expense, only: [:edit, :update, :destroy, :show]
 
   # GET /expenses
@@ -10,17 +10,6 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @expenses }
-    end
-  end
-
-  # GET /expenses/1
-  # GET /expenses/1.json
-  def show
-    @expense = Expense.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @expense }
     end
   end
 
@@ -35,15 +24,11 @@ class ExpensesController < ApplicationController
     end
   end
 
-  # GET /expenses/1/edit
-  def edit
-    @expense = Expense.find(params[:id])
-  end
-
   # POST /expenses
   # POST /expenses.json
   def create
-    @expense = Expense.new(params[:expense])
+    @expense = current_user.expenses.new(params[:expense])
+    @expense.group_id = current_user.group_id
 
     respond_to do |format|
       if @expense.save

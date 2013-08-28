@@ -15,17 +15,7 @@
 //= require bootstrap.min
 var flashTimer;
 $(document).ready(function(){
-  $(".back-to-top").hide();
-  $('.dropdown-toggle').dropdown();
   $("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
-  console.log("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']");
-  var offset = 280, duration = 500;
-  $(window).scroll(function() {
-    $(this).scrollTop() > offset ? $('.back-to-top').fadeIn(duration) : $('.back-to-top').fadeOut(duration);
-  });
-  $('.back-to-top').click(function(event) {
-    $('html, body').animate({scrollTop: 0}, duration);
-  });
   hideFlash();
 });
 function toggleDoms(show, hide){
@@ -42,7 +32,7 @@ function displayFlash(message, type){
 function hideFlash(){
   clearTimeout(flashTimer);
   flashTimer = setTimeout(function() {
-    if (! $(".alert").hasClass("alert-error"))
+    if (! $(".alert").hasClass("alert-danger"))
       $(".alert").remove();
   }, 6000);
 }

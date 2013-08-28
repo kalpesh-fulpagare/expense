@@ -13,22 +13,23 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= yield :css %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+    <%= favicon_link_tag '144.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
 
     <!-- For iPhone with high-resolution Retina display: -->
     <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+    <%= favicon_link_tag '144.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
 
     <!-- For first- and second-generation iPad: -->
     <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+    <%= favicon_link_tag '72.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
 
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+    <%= favicon_link_tag '57.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
@@ -39,14 +40,21 @@
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="/">ExpenseApp</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li rel="dashboards"><a href="/dashboard">Expenses</a></li>
-           <% if current_user.is_admin %>
+          <li rel="dashboards"><a href="/dashboard">Dashboard</a></li>
+          <li rel="expenses"><a href="/expenses">Expenses</a></li>
             <li rel="categories"><a href="/categories">Categories</a></li>
+           <% if current_user.is_admin %>
             <li rel="groups"><a href="/groups">Groups</a></li>
             <li rel="users"><a href="/users">Users</a></li>
           <% end %>
@@ -62,6 +70,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= display_name current_user %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              <li><a href="/users/<%= current_user.id %>/edit">Edit Profile</a></li>
+              <li><a href="/users/<%= current_user.id %>/change_password">Change Password</a></li>
             </ul>
           </li>
         </ul>
@@ -69,31 +79,24 @@
     </nav>
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
         <div class="col-md-9" id="contentBody">
           <div class="actionLoader"></div>
-          <%= bootstrap_flash %>
+          <%= show_flash %>
           <%= yield %>
         </div>
-      </div><!--/row-->
+        <div class="col-md-3">
+          <div class="sidebar-nav">
+            <%= yield :right_sidebar %>
+            <!--ul class="well nav nav-list"><li class="nav-header">Sidebar</li><li><%#= link_to "Link1", "/"  %></li><li><%#= link_to "Link2", "/"  %></li><li><%#= link_to "Link3", "/"  %></li></ul-->
+          </div>
+        </div>
+      </div>
 
-      <footer>
-        <p>&copy; ExpenseApp by Kalpesh 2013</p>
-      </footer>
+      <!--footer><p class='text-center'>&copy; ExpenseApp by Kalpesh 2013</p></footer-->
 
-    </div> <!-- /container -->
-    <a class="btn btn-primary disabled back-to-top" href="javascript:void(0)" >Back to Top</a>
+    </div>
+    <div class="dn"><div class="activeTab"><%= params[:controller] %></div></div>
     <%= javascript_include_tag "application" %>
     <%= yield :js %>
-    <div class="dn"><div class="activeTab"><%= params[:controller] %></div></div>
   </body>
 </html>

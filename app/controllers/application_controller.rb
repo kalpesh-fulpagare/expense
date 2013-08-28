@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :fetch_required_items
   before_filter :configure_permitted_parameters, if: :devise_controller?
   layout :set_layout
 
@@ -18,7 +18,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  %w(category group expense).each do |name|
+  def fetch_required_items
+    if current_user && !request.xhr? # && request.get?
+      system_setting = SystemSetting.find_by_name("cache")
+      # @categories = Rails.cache.fetch("dbCat#{system_setting.value['category']}", expires_in: 1.day) {
+      #   Category.select("id, name, user_id").order("created_at DESC").to_a
+      # }
+      @categories = Category.select("id, name, user_id").order("created_at DESC")
+    end
+  end
+
+  %w(category group expense user).each do |name|
     define_method "find_#{name}" do
       obj = instance_variable_set("@#{name}", name.camelize.constantize.find_by_id(params[:id]))
       unless obj

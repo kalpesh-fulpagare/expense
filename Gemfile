@@ -39,11 +39,12 @@ gem 'devise', '3.0.1'
 # To use debugger
 group :development do
   gem 'debugger'
+  gem 'meta_request'
 end
-
 # This version needs to be hardcoded for OpenShift compatibility
 gem 'thor', '= 0.14.6'
 gem 'strong_parameters', "0.2.1"
 
 # This needs to be installed so we can run Rails console on OpenShift directly
 gem 'minitest'
+gem 'kaminari'

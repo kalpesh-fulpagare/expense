@@ -11,10 +11,14 @@ RailsApp::Application.routes.draw do
   end
 
   resources :expenses
-  resources :categories
-  resources :users
+  resources :categories, except: [:show]
+  resources :users, except: [:show] do
+    member do
+      put 'change_password'
+    end
+  end
   resource :dashboard
-
+  match 'users/:id/change_password' => 'users#edit'
 
   # devise_for :users
   # # Devise Routes
