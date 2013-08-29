@@ -2,6 +2,7 @@ module ApplicationHelper
   ALERT_TYPES = [:danger, :info, :success, :warning]
 
   def display_name user
+    return "" unless user
     "#{user.first_name} #{user.last_name}"
   end
 

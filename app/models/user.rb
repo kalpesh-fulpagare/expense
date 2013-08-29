@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :first_name, :first_name, presence: true
 
+  # Associations
   has_many :expenses
   belongs_to :group
 

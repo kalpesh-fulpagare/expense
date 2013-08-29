@@ -3,7 +3,7 @@
     <h3>Change Password</h3>
   </div>
   <%= form_tag(change_password_user_path(current_user), method: :put, :class => 'form-horizontal') do |f| %>
-    <%= html_errors @user %>
+    <%= html_errors current_user %>
     <div class="form-group">
       <label class="col-lg-2 control-label" for="user_current_password">Current password</label>
       <div class="col-lg-10">

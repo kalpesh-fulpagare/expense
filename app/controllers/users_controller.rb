@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_admin!, :expect => [:edit, :update]
+  before_filter :require_admin!, :except => [:edit, :update, :change_password]
   before_filter :require_admin_or_owner!, only: [:edit, :update]
   before_filter :find_user, only: [:edit, :update, :destroy, :show, :change_password]
 
@@ -32,36 +32,31 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update_attributes(params[:user].permit(:first_name, :last_name, :username))
-      redirect_to @user, notice: 'User was successfully updated.'
+    if @user.update_attributes(params[:user].permit(:first_name, :last_name, :username))
+      redirect_to edit_user_path(@user), notice: 'User was successfully updated.'
     else
-      render action: "edit"
+      render "edit"
     end
   end
 
   def change_password
-    if @user.update_with_password(params[:user].permit(:current_password, :password, :password_confirmation))
+    if current_user.update_with_password(params[:user].permit(:current_password, :password, :password_confirmation))
       redirect_to "/", notice: 'Password Changed successfully!'
       sign_in current_user, :bypass => true
     else
-      render action: "edit"
+      render "edit"
     end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    redirect_to users_url
   end
 
   def require_admin_or_owner!
-    unless current_user.id.to_s == params[:id] && current_user.is_admin
+    unless current_user.id.to_s == params[:id] || current_user.is_admin
       flash[:alert] = "Access denied"
       respond_to do |format|
         format.html {

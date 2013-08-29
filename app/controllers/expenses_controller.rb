@@ -1,16 +1,11 @@
 class ExpensesController < ApplicationController
-  before_filter :require_admin!, except: [:new, :create]
+  before_filter :require_admin!, except: [:new, :create, :index]
   before_filter :find_expense, only: [:edit, :update, :destroy, :show]
 
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @expenses }
-    end
+    @expenses = Expense.select("id, title, description, category_id, user_id, date, cost").includes(:user).includes(:category).page(params[:page]).per(50)
   end
 
   # GET /expenses/new
