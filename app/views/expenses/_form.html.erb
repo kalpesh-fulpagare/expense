@@ -31,7 +31,7 @@
   <div class="form-group">
       <%= f.label :date, :class => 'col-lg-2 control-label' %>
     <div class="col-lg-10 input-group">
-      <%= f.text_field :date, class: "datepicker form-control" %>
+      <%= f.text_field :date, class: "datepicker form-control", value: @expense.date.try(:strftime, "%d-%b-%Y") %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span>
     </div>
   </div>
@@ -47,6 +47,6 @@
 <%- content_for :js do %>
   <%= javascript_include_tag "datepicker" %>
   <script type="text/javascript">
-  $(".datepicker").datepicker({format: 'dd-M-yyyy'});
+    $(".datepicker").datepicker({format: 'dd-M-yyyy', endDate: "+0d", startDate: '-30d'});
   </script>
 <% end %>

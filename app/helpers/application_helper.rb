@@ -35,4 +35,8 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+
+  def current_user_has_access_of?(object)
+    current_user.id == object.user_id || current_user.is_admin
+  end
 end

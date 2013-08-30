@@ -1,66 +1,53 @@
 class ExpensesController < ApplicationController
-  before_filter :require_admin!, except: [:new, :create, :index]
-  before_filter :find_expense, only: [:edit, :update, :destroy, :show]
+  before_filter :find_expense, only: [:edit, :update, :destroy]
 
-  # GET /expenses
-  # GET /expenses.json
   def index
-    @expenses = Expense.select("id, title, description, category_id, user_id, date, cost").includes(:user).includes(:category).page(params[:page]).per(50)
+    @expenses = Expense.fetch_expenses(current_user, params)
   end
 
-  # GET /expenses/new
-  # GET /expenses/new.json
   def new
     @expense = Expense.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @expense }
-    end
   end
 
-  # POST /expenses
-  # POST /expenses.json
   def create
-    @expense = current_user.expenses.new(params[:expense])
+    @expense = current_user.expenses.new(expense_params)
     @expense.group_id = current_user.group_id
-
-    respond_to do |format|
-      if @expense.save
-        format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
-        format.json { render json: @expense, status: :created, location: @expense }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.save
+      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.'
+    else
+      render action: "new"
     end
   end
 
-  # PUT /expenses/1
-  # PUT /expenses/1.json
+  def show
+    @expense = Expense.find_displayable_expense(params[:id], current_user)
+  end
+
   def update
-    @expense = Expense.find(params[:id])
-
-    respond_to do |format|
-      if @expense.update_attributes(params[:expense])
-        format.html { redirect_to @expense, notice: 'Expense was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.update_attributes(expense_params)
+      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully updated.'
+    else
+      render "edit"
     end
   end
 
-  # DELETE /expenses/1
-  # DELETE /expenses/1.json
   def destroy
-    @expense = Expense.find(params[:id])
-    @expense.destroy
-
-    respond_to do |format|
-      format.html { redirect_to expenses_url }
-      format.json { head :no_content }
+    if @expense.destroy
+      redirect_to expenses_url, notice: "Expense deleted successfully."
+    else
+      redirect_to expenses_url, notice: "Expense could not be deleted, please try after some time."
     end
+  end
+
+  def find_expense
+    @expense = Expense.find_editable_expense(params[:id], current_user)
+    unless @expense
+      flash[:alert] = "Expense not found"
+      redirect_to "/expenses"
+    end
+  end
+
+  def expense_params
+    params.require(:expense).permit(:title, :description, :category_id, :cost, :date)
   end
 end

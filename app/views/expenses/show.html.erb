@@ -1,33 +1,33 @@
-<%- model_class = Expense -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1>Expense Details</h1>
 </div>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Expense Owner</th>
+      <th>Cos</th>
+      <th>User group info</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td><%= @expense.title %></td>
+      <td><%= @expense.description %></td>
+      <td><%= @expense.category.try(:name) %></td>
+      <td><%= display_name @expense.user %></td>
+      <td><%= @expense.cost %></td>
+      <td><%= @expense.group.try(:name) %></td>
+      <td><%= @expense.date.try(:strftime, "%d-%b-%Y") %></td>
+    </tr>
+  </tbody>
+</table>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @expense.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @expense.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
-  <dd><%= @expense.category_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @expense.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
-  <dd><%= @expense.cost %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:group_id) %>:</strong></dt>
-  <dd><%= @expense.group_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
-  <dd><%= @expense.date %></dd>
-</dl>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              expenses_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_expense_path(@expense), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              expense_path(@expense),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<div class="form-group well">
+  <a href="/expenses" class="btn btn-default btn-sm">Back</a>
+  <%- if current_user_has_access_of? @expense %>
+    <a href="/expenses/<%= @expense.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+    <a href="/expenses/<%= @expense.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+  <% end %>
 </div>
