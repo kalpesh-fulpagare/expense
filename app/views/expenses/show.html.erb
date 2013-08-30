@@ -28,6 +28,8 @@
   <a href="/expenses" class="btn btn-default btn-sm">Back</a>
   <%- if current_user_has_access_of? @expense %>
     <a href="/expenses/<%= @expense.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
-    <a href="/expenses/<%= @expense.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
   <% end %>
+  <%- if current_user.is_admin %>
+    <a href="/expenses/<%= @expense.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+  <% end -%>
 </div>

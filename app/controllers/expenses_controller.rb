@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    if @expense.destroy
+    if current_user.is_admin && @expense.destroy
       redirect_to expenses_url, notice: "Expense deleted successfully."
     else
       redirect_to expenses_url, notice: "Expense could not be deleted, please try after some time."
