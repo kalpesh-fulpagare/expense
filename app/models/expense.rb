@@ -20,7 +20,7 @@ class Expense < ActiveRecord::Base
     end
 
     def dashboard_expenses(user)
-      expenses = select("id, title, description, category_id, user_id, date, cost").includes(:user).includes(:category)
+      expenses = select("id, title, description, category_id, user_id, date, cost")
       expenses = expenses.where("group_id = ?", user.group_id) if user.group_id.present?
       expenses = expenses.where("MONTH(date) = MONTH(CURRENT_DATE)").order("date DESC, updated_at DESC")
       expenses
