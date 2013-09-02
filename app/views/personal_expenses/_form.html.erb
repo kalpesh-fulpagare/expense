@@ -1,0 +1,52 @@
+<%- content_for :css do %>
+  <%= stylesheet_link_tag "datepicker", :media => "all" %>
+<% end %>
+<%= form_for @personal_expense, :html => {role: "form", :class => 'form-horizontal' } do |f| %>
+  <%= html_errors @personal_expense %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+    <%= f.select(:category_id, @categories.collect {|p| [ p.name, p.id ] }, {}, {class: "form-control"})%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :cost, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10 input-group">
+      <%= f.text_field :cost, class: "form-control" %>
+      <span class="input-group-addon">Rs</span>
+    </div>
+  </div>
+  <div class="form-group">
+      <%= f.label :date, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10 input-group">
+      <%= f.text_field :date, class: "datepicker form-control", value: @personal_expense.date.try(:strftime, "%d-%b-%Y"), readonly: true %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-default' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                personal_expenses_path, :class => 'btn' %>
+    </div>
+  </div>
+<% end %>
+<%- content_for :js do %>
+  <%= javascript_include_tag "datepicker" %>
+  <script type="text/javascript">
+    $(".datepicker").datepicker({format: 'dd-M-yyyy', endDate: "+0d", startDate: '-30d'});
+  </script>
+<% end %>

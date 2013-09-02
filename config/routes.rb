@@ -11,6 +11,7 @@ RailsApp::Application.routes.draw do
   end
 
   resources :expenses
+  resources :personal_expenses
   resources :categories, except: [:show]
   resources :users, except: [:show] do
     member do

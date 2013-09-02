@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   # Associations
   has_many :expenses
+  has_many :personal_expenses
   belongs_to :group
 
   # Callbacks

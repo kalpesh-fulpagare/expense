@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>Personal Expense Details</h1>
+</div>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Cost</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td><%= @personal_expense.title %></td>
+      <td><%= @personal_expense.description %></td>
+      <td><%= @personal_expense.category.try(:name) %></td>
+      <td><%= @personal_expense.cost %></td>
+      <td><%= @personal_expense.date.try(:strftime, "%d-%b-%Y") %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group well">
+  <a href="/personal_expenses" class="btn btn-default btn-sm">Back</a>
+  <a href="/personal_expenses/<%= @personal_expense.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+  <a href="/personal_expenses/<%= @personal_expense.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+</div>
