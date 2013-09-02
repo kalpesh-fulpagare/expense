@@ -19,6 +19,16 @@ Welcome  <strong><%= display_name current_user %> </strong>
 <%= content_for :right_sidebar do %>
   <%= render "shared/filter" %>
 <% end %>
+<table class='table table-bordered totalTable'>
+  <tr>
+    <td class="active">
+      Total Cost
+    </td>
+    <td class="success">
+    0
+    </td>
+  </tr>
+</table>
 <%= link_to "Add new Expense", new_expense_path, :class => 'btn btn-primary btn-sm' %>
 <%= content_for :js do %>
   <%= javascript_include_tag "dashboard" %>
