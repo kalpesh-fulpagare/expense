@@ -19,7 +19,7 @@
       <td><%= display_name @expense.user %></td>
       <td><%= @expense.cost %></td>
       <td><%= @expense.group.try(:name) %></td>
-      <td><%= @expense.date.try(:strftime, "%d-%b-%Y") %></td>
+      <td><%= @expense.date.try(:strftime, "%d %b, %Y") %></td>
     </tr>
   </tbody>
 </table>

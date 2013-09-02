@@ -15,7 +15,7 @@
       <td><%= @personal_expense.description %></td>
       <td><%= @personal_expense.category.try(:name) %></td>
       <td><%= @personal_expense.cost %></td>
-      <td><%= @personal_expense.date.try(:strftime, "%d-%b-%Y") %></td>
+      <td><%= @personal_expense.date.try(:strftime, "%d %b, %Y") %></td>
     </tr>
   </tbody>
 </table>

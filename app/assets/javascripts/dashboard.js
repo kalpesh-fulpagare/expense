@@ -1,3 +1,4 @@
+var months = {0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "June", 6: "July", 7: "Aug", 8: "Sept", 9: "Oct", 10: "Nov", 11: "Dec"}
 $(document).ready(function(){
   addExpenses(expenses_json);
   $(".sidebar-nav input[type='checkbox']").click(function(){
@@ -20,7 +21,7 @@ function applyFilter(){
 }
 function addExpenses(exp_json){
   $("#expensesTable").find("tr").not(".thHeads").remove();
-  var table_data="", category_name;
+  var table_data="", category_name, dt;
   $.each(exp_json, function( index, e ) {
     table_data += "<tr>";
     table_data += "<td><a href='/expenses/"+ e.id +"'></a>" + e.id + "</td>";
@@ -29,8 +30,10 @@ function addExpenses(exp_json){
     table_data += "<td>" + categories_json[e.category_id][0].name + "</td>";
     table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>";
     table_data += "<td>" + e.cost + "</td>";
-    table_data += "<td>" + e.date + "</td>";
+    dt = new Date(e.date.replace(/-/g,"/"));
+    console.log(dt);
+    table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + ", " + dt.getFullYear() + "</td>";
     table_data += "<tr>";
   });
-  $("#expensesTable tbody").append(table_data);
+  $("#expensesTable").append(table_data);
 }
