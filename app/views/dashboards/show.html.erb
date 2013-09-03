@@ -1,7 +1,6 @@
 Welcome  <strong><%= display_name current_user %> </strong>
-<%- model_class = Expense -%>
 <div class="page-header">
-  <h4>Expenses for the Month</h4>
+  <h4>Expenses for last 3 Months</h4>
 </div>
 <table class="table table-striped table-bordered" id="expensesTable">
   <thead>
@@ -11,24 +10,14 @@ Welcome  <strong><%= display_name current_user %> </strong>
       <th>Description</th>
       <th>Category</th>
       <th>Purchased by</th>
-      <th>Cost</th>
       <th>Date</th>
+      <th>Cost</th>
     </tr>
   </thead>
 </table>
 <%= content_for :right_sidebar do %>
   <%= render "shared/filter" %>
 <% end %>
-<table class='table table-bordered totalTable'>
-  <tr>
-    <td class="active">
-      Total Cost
-    </td>
-    <td class="success">
-    0
-    </td>
-  </tr>
-</table>
 <%= link_to "Add new Expense", new_expense_path, :class => 'btn btn-primary btn-sm' %>
 <%= content_for :js do %>
   <%= javascript_include_tag "dashboard" %>

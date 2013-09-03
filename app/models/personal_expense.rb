@@ -10,17 +10,10 @@ class PersonalExpense < ActiveRecord::Base
   belongs_to :category
 
   class << self
-    def fetch_expenses(user, params)
-      expenses = select("id, title, description, category_id, user_id, date, cost").includes(:user).includes(:category)
+    def fetch_expenses(user)
+      expenses = select("id, title, description, category_id, user_id, date, cost, MONTH(date) AS month")
       expenses = expenses.where("user_id = ?", user.id)
-      expenses = expenses.order("date DESC, updated_at DESC").page(params[:page]).per(200)
-      expenses
-    end
-
-    def dashboard_expenses(user)
-      expenses = select("id, title, description, category_id, user_id, date, cost")
-      expenses = expenses.where("user_id = ?", user.id)
-      expenses = expenses.where("MONTH(date) = MONTH(CURRENT_DATE)").order("date DESC, updated_at DESC")
+      expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 2 MONTH)").order("date DESC, updated_at DESC")
       expenses
     end
   end

@@ -4,5 +4,6 @@ class DashboardsController < ApplicationController
     @users = User.select("id, first_name, last_name").where("id IN (?)", @expenses.map(&:user_id))
     @category_ids = @expenses.map(&:category_id)
     @dates = @expenses.map(&:date)
+    @months = @expenses.map(&:month)
   end
 end

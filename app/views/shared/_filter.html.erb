@@ -19,20 +19,42 @@
   </div>
 </div>
 
+<%- if @users %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Users</div>
+    <div class="panel-body">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" filter_name="user_id" value="All" checked='true' class='all'>
+          All
+        </label>
+      </div>
+      <% @users.each do |u| %>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" filter_name="user_id" value="<%= u.id %>">
+            <%= display_name u %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <div class="panel panel-primary">
-  <div class="panel-heading">Users</div>
+  <div class="panel-heading">Months</div>
   <div class="panel-body">
     <div class="checkbox">
       <label>
-        <input type="checkbox" filter_name="user_id" value="All" checked='true' class='all'>
+        <input type="checkbox" filter_name="month" value="All" checked='true' class='all'>
         All
       </label>
     </div>
-    <% @users.each do |u| %>
+    <% @months.each do |month| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="user_id" value="<%= u.id %>">
-          <%= display_name u %>
+          <input type="checkbox" filter_name="month" value="<%= month %>">
+          <%= Date::MONTHNAMES[month] %>
         </label>
       </div>
     <% end %>

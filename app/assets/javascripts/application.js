@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap.min
 var flashTimer;
+var months = {0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "June", 6: "July", 7: "Aug", 8: "Sept", 9: "Oct", 10: "Nov", 11: "Dec"}
 $(document).ready(function(){
   $("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
   hideFlash();
@@ -35,4 +36,27 @@ function hideFlash(){
     if (! $(".alert").hasClass("alert-danger"))
       $(".alert").remove();
   }, 6000);
+}
+function filterRecords(filters, record_json){
+  $.each(filters, function( name , type ) {
+    var tmp_json = [], filter_values = [];
+    $(".sidebar-nav input:checkbox[filter_name='"+ name +"']:checked").each(function(){
+      if($(this).val() == "All")
+        filter_values.push("all");
+      else
+        filter_values.push(type == 'int' ? parseInt($(this).val()) : $(this).val());
+    });
+    if(filter_values.length == 1 && filter_values[0] == 'all'){
+      filter_values = [];
+      $(".sidebar-nav input:checkbox[filter_name='"+ name +"']").not('.all').each(function(){
+        filter_values.push(type == 'int' ? parseInt($(this).val()) : $(this).val());
+      });
+    }
+    $.each(record_json, function( index, record ) {
+       if(filter_values.indexOf(eval("record."+ name)) != -1)
+         tmp_json.push(record);
+    });
+    record_json = tmp_json;
+  });
+  return record_json;
 }

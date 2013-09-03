@@ -2,7 +2,10 @@ class PersonalExpensesController < ApplicationController
   before_filter :find_personal_expense, only: [:edit, :update, :destroy, :show]
 
   def index
-    @personal_expenses = PersonalExpense.fetch_expenses(current_user, params)
+    @personal_expenses = PersonalExpense.fetch_expenses(current_user)
+    @category_ids = @personal_expenses.map(&:category_id)
+    @dates = @personal_expenses.map(&:date)
+    @months = @personal_expenses.map(&:month)
   end
 
   def new
