@@ -4,7 +4,7 @@ class PersonalExpensesController < ApplicationController
   def index
     @personal_expenses = PersonalExpense.fetch_expenses(current_user)
     @category_ids = @personal_expenses.map(&:category_id).uniq
-    @dates = @personal_expenses.map(&:date).uniq
+    @dates = @personal_expenses.map(&:date).sort{ |x,y| y <=> x }.uniq
     @months = @personal_expenses.map(&:month).uniq
   end
 

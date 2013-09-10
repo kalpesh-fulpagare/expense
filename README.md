@@ -105,10 +105,8 @@ will be the same.
 
 [template]: https://openshift.redhat.com/app/console/application_types/rails
 
-License
--------
+TO SSH: ssh 521c38b55973ca27d9000001@expense-kalpeshonrails.rhcloud.com
 
-This code is dedicated to the public domain to the maximum extent permitted by applicable law, pursuant to CC0 (http://creativecommons.org/publicdomain/zero/1.0/)
 expense
 =======
 
