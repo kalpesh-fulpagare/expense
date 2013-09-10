@@ -26,7 +26,7 @@ function addExpenses(exp_json){
     table_data += "<tr>";
     table_data += "<td><a href='/expenses/"+ e.id +"'>" + e.id + "</a></td>";
     table_data += "<td>" + e.title + "</td>";
-    table_data += "<td>" + e.description + "</td>";
+    table_data += "<td>" + e.description.replace(/\r\n/g, "<br>") + "</td>";
     table_data += "<td>" + categories_json[e.category_id][0].name + "</td>";
     table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>";
     cost += parseInt(e.cost);
