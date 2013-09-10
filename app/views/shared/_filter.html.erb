@@ -74,7 +74,7 @@
       <div class="checkbox">
         <label>
           <input type="checkbox" filter_name="date" value="<%= date %>">
-          <%= date.try(:strftime, "%d %b, %Y") %>
+          <%= date.try(:strftime, "%d %b (%A), %Y") %>
         </label>
       </div>
     <% end %>
