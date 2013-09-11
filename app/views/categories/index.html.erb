@@ -6,6 +6,7 @@
     <tr>
       <th>id</th>
       <th>Name</th>
+      <th>Type</th>
       <% if current_user.is_admin %>
         <th>Actions</th>
       <% end %>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= link_to category.id, edit_category_path(category) %></td>
         <td><%= category.name %></td>
+        <td><%= Category::TYPES[category.category_type] %></td>
         <% if current_user.is_admin %>
           <td>
             <a href="/categories/<%= category.id %>/edit" class="btn-default btn btn-sm">Edit</a>

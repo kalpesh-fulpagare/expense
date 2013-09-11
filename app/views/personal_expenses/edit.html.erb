@@ -2,3 +2,7 @@
   <h3>Edit Personal Expense</h3>
 </div>
 <%= render 'form' %>
+<%= content_for :right_sidebar do %>
+  <a href="/personal_expenses/new" class="btn btn-primary">Add new personal expense</a>
+  <a href="/personal_expenses" class="btn btn-primary" style="margin-top: 20px;">View expenses</a>
+<% end %>

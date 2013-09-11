@@ -14,13 +14,22 @@ u = User.new(first_name: "Expense", last_name: "Admin", email: "expense_admin@yo
 u.is_admin = true
 u.save
 puts u.errors.any? ? u.errors.full_messages : "Admin created successfully"
-Category.create(name: "Food", user_id: u.id)
-Category.create(name: "Petrol", user_id: u.id)
-Category.create(name: "Recharge", user_id: u.id)
-Category.create(name: "Ticket Fare", user_id: u.id)
-Category.create(name: "Snacks", user_id: u.id)
-Category.create(name: "Rent", user_id: u.id)
-Category.create(name: "Servicing", user_id: u.id)
-Category.create(name: "Accessories", user_id: u.id)
-Category.create(name: "Kirana", user_id: u.id)
-Category.create(name: "Movie", user_id: u.id)
+
+Category.create(name: "Food", user_id: u.id, category_type: "exp")
+Category.create(name: "Accessories", user_id: u.id, category_type: "exp")
+Category.create(name: "Movie", user_id: u.id, category_type: "exp")
+Category.create(name: "Snacks", user_id: u.id, category_type: "exp")
+Category.create(name: "Kirana", user_id: u.id, category_type: "exp")
+Category.create(name: "Rent", user_id: u.id, category_type: "exp")
+Category.create(name: "Vegetables", user_id: u.id, category_type: "exp")
+Category.create(name: "Chapati", user_id: u.id, category_type: "exp")
+
+Category.create(name: "Food", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Accessories", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Movie", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Snacks", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Kirana", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Petrol", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Recharge", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Ticket Fare", user_id: u.id, category_type: "personal_exp")
+Category.create(name: "Servicing", user_id: u.id, category_type: "personal_exp")

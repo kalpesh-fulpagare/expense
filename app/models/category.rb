@@ -1,13 +1,16 @@
 class Category < ActiveRecord::Base
-  attr_accessible :name, :user_id
+  attr_accessible :name, :user_id, :category_type
 
   # Validations
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, :category_type, presence: true
+  validates :name, uniqueness: {scope: :category_type}
 
   # Associations
   has_many :expenses
   has_many :users
+
+  # Constants
+  TYPES = {"exp" => "Expense", "personal_exp" => "Personal Expense"}
 
   # Callbacks
   after_save :update_cache_time

@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params[:category])
+    @category = Category.new(category_params)
     if @category.save
       redirect_to categories_path, notice: 'Category was successfully created.'
     else
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @category.update_attributes(params[:category])
+      if @category.update_attributes(category_params)
         format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -31,5 +31,9 @@ class CategoriesController < ApplicationController
     else
       redirect_to categories_path, alert: 'Category could not be deleted.'
     end
+  end
+
+  def category_params
+    params.require(:category).permit(:name, :category_type)
   end
 end
