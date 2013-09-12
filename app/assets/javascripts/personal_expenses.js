@@ -31,6 +31,6 @@ function addExpenses(exp_json){
     table_data += "<td class='text-right'>" + e.cost + "</td>";
     table_data += "<tr>";
   });
-  table_data += "<tr><td class='warning text-right' colspan='6'>Total Cost</td><td class='success text-right'>"+ cost +"</td></tr>";
+  table_data += "<tr><td class='warning text-right' colspan='5'>Total Cost</td><td class='success text-right' colspan='5'>"+ cost +"</td></tr>";
   $("#expensesTable").append(table_data);
 }

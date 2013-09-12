@@ -25,7 +25,7 @@
   <script type="text/javascript">
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @personal_expenses.to_json.html_safe %>
-    users_json = <%= @users.group_by(&:id).to_json.html_safe %>
+    users_json = <%= @users.group_by(&:id).to_json.html_safe if @users %>
     is_admin = <%= current_user.is_admin %>
   </script>
 <% end %>
