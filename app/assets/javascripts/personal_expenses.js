@@ -26,9 +26,11 @@ function addExpenses(exp_json){
     cost += parseInt(e.cost);
     dt = new Date(e.date.replace(/-/g,"/"));
     table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + " (" + days[dt.getDay()] + ")" + ", " + dt.getFullYear() + "</td>";
+    if(is_admin)
+      table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>";
     table_data += "<td class='text-right'>" + e.cost + "</td>";
     table_data += "<tr>";
   });
-  table_data += "<tr><td class='warning text-right' colspan='5'>Total Cost</td><td class='success text-right'>"+ cost +"</td></tr>";
+  table_data += "<tr><td class='warning text-right' colspan='6'>Total Cost</td><td class='success text-right'>"+ cost +"</td></tr>";
   $("#expensesTable").append(table_data);
 }

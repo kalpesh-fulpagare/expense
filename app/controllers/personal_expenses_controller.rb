@@ -6,6 +6,7 @@ class PersonalExpensesController < ApplicationController
     @category_ids = @personal_expenses.map(&:category_id).uniq
     @dates = @personal_expenses.map(&:date).sort{ |x,y| y <=> x }.uniq
     @months = @personal_expenses.map(&:month).uniq
+    @users = User.select("id, first_name, last_name").where("id IN (?)", @personal_expenses.map(&:user_id)) if current_user.is_admin
   end
 
   def new

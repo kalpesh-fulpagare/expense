@@ -9,6 +9,9 @@
       <th>Description</th>
       <th>Category</th>
       <th>Date</th>
+      <%- if current_user.is_admin %>
+        <th>User</th>
+      <% end %>
       <th>Cost</th>
     </tr>
   </thead>
@@ -22,5 +25,7 @@
   <script type="text/javascript">
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @personal_expenses.to_json.html_safe %>
+    users_json = <%= @users.group_by(&:id).to_json.html_safe %>
+    is_admin = <%= current_user.is_admin %>
   </script>
 <% end %>
