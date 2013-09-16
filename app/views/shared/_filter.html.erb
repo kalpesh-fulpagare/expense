@@ -1,90 +1,82 @@
-<div class="accordionPanel">
-
-  <div class="panel panel-primary">
-    <div class="panel-heading" data-toggle="collapse" href="#collapseOne" data-parent=".accordionPanel">Categories</div>
-    <div class="panel-body collapse"id="collapseOne">
+<div class="panel panel-primary">
+  <div class="panel-heading" data-toggle="collapse" href="#collapseOne">Categories</div>
+  <div class="panel-body collapse"id="collapseOne">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" filter_name="category_id" value="All" checked='true' class='all'>
+        All
+      </label>
+    </div>
+    <% @categories.each do |c| %>
+      <%- next unless @category_ids.include? c.id %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="category_id" value="All" checked='true' class='all'>
+          <input type="checkbox" filter_name="category_id" value="<%= c.id %>">
+          <%= c.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%- if @users %>
+  <div class="panel panel-primary">
+    <div class="panel-heading" data-toggle="collapse" href="#collapseTwo">Users</div>
+    <div class="panel-body collapse" id="collapseTwo">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" filter_name="user_id" value="All" checked='true' class='all'>
           All
         </label>
       </div>
-      <% @categories.each do |c| %>
-        <%- next unless @category_ids.include? c.id %>
+      <% @users.each do |u| %>
         <div class="checkbox">
           <label>
-            <input type="checkbox" filter_name="category_id" value="<%= c.id %>">
-            <%= c.name %>
+            <input type="checkbox" filter_name="user_id" value="<%= u.id %>">
+            <%= display_name u %>
           </label>
         </div>
       <% end %>
     </div>
-    <div class="clearfix"></div>
   </div>
+<% end %>
 
-  <%- if @users %>
-    <div class="panel panel-primary">
-      <div class="panel-heading" data-toggle="collapse" href="#collapseTwo" data-parent=".accordionPanel">Users</div>
-      <div class="panel-body collapse" id="collapseTwo">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" filter_name="user_id" value="All" checked='true' class='all'>
-            All
-          </label>
-        </div>
-        <% @users.each do |u| %>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" filter_name="user_id" value="<%= u.id %>">
-              <%= display_name u %>
-            </label>
-          </div>
-        <% end %>
-      </div>
-      <div class="clearfix"></div>
+<div class="panel panel-primary">
+  <div class="panel-heading" data-toggle="collapse" href="#collapseThree">Months</div>
+  <div class="panel-body collapse"id="collapseThree">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" filter_name="month" value="All" checked='true' class='all'>
+        All
+      </label>
     </div>
-  <% end %>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading" data-toggle="collapse" href="#collapseThree" data-parent=".accordionPanel">Months</div>
-    <div class="panel-body collapse"id="collapseThree">
+    <% @months.each do |month| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="month" value="All" checked='true' class='all'>
-          All
+          <input type="checkbox" filter_name="month" value="<%= month %>">
+          <%= Date::MONTHNAMES[month] %>
         </label>
       </div>
-      <% @months.each do |month| %>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" filter_name="month" value="<%= month %>">
-            <%= Date::MONTHNAMES[month] %>
-          </label>
-        </div>
-      <% end %>
-    </div>
-    <div class="clearfix"></div>
+    <% end %>
   </div>
+</div>
 
-  <div class="panel panel-primary">
-    <div class="panel-heading" data-toggle="collapse" href="#collapseFour" data-parent=".accordionPanel">Dates</div>
-    <div class="panel-body collapse"id="collapseFour">
+<div class="panel panel-primary">
+  <div class="panel-heading" data-toggle="collapse" href="#collapseFour">Dates</div>
+  <div class="panel-body collapse"id="collapseFour">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" filter_name="date" value="All" checked='true' class='all'>
+        All
+      </label>
+    </div>
+    <% @dates.each do |date| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="date" value="All" checked='true' class='all'>
-          All
+          <input type="checkbox" filter_name="date" value="<%= date %>">
+          <%= date.try(:strftime, "%d %b (%A), %Y") %>
         </label>
       </div>
-      <% @dates.each do |date| %>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" filter_name="date" value="<%= date %>">
-            <%= date.try(:strftime, "%d %b (%A), %Y") %>
-          </label>
-        </div>
-      <% end %>
-    </div>
-    <div class="clearfix"></div>
+    <% end %>
   </div>
-
 </div>
