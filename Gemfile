@@ -16,6 +16,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   # Add Foundation Here
   gem 'compass-rails' # you need this or you get an err
+  gem 'turbo-sprockets-rails3'
 end
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -23,6 +24,11 @@ gem "twitter-bootstrap-rails"
 
 gem 'jquery-rails', '2.2.1'
 gem 'devise', '3.0.1'
+group :test do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
