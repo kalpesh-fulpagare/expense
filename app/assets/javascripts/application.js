@@ -34,7 +34,7 @@ function displayFlash(message, type){
 function hideFlash(){
   clearTimeout(flashTimer);
   flashTimer = setTimeout(function() {
-    if (! $(".alert").hasClass("alert-danger"))
+    if (! $(".alert").hasClass("alert-danger") && ! $(".alert").hasClass("alert-info"))
       $(".alert").remove();
   }, 6000);
 }

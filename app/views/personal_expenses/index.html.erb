@@ -1,5 +1,6 @@
+<%= link_to "Add new personal expense", new_personal_expense_path, :class => 'btn btn-primary pull-right' %>
 <div class="page-header">
-  <h4>Personal expenses for last three months</h4>
+  <strong>Personal expenses for last three months</strong>
 </div>
 <table class="table table-striped table-bordered" id="expensesTable">
   <thead>
@@ -19,7 +20,6 @@
 <%= content_for :right_sidebar do %>
   <%= render "shared/filter" %>
 <% end %>
-<%= link_to "Add new personal expense", new_personal_expense_path, :class => 'btn btn-primary' %>
 <%= content_for :js do %>
   <%= javascript_include_tag "personal_expenses" %>
   <script type="text/javascript">
