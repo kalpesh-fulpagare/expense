@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessor :login, :current_password
+  attr_accessor :login, :current_password, :tmp_password
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :username, :login, :current_password
 
   # Validations
@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   # Callbacks
   after_save :update_cache_time
+  after_create :welcome_email
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -31,5 +32,11 @@ class User < ActiveRecord::Base
     ss = SystemSetting.find_by_name("cache")
     ss.value['user'] = Time.now.utc.to_s.gsub!(/[ : +-]+/,'_')
     ss.update_attribute(:value, ss.value)
+  end
+
+  private
+  def welcome_email
+    #UserMailer.delay.welcome_email(self, self.tmp_password) unless self.is_admin
+    UserMailer.welcome_email(self, self.tmp_password).deliver unless self.is_admin
   end
 end

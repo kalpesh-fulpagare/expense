@@ -19,7 +19,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    password = SecureRandom.hex[0,8]
     @user = User.new(params[:user])
+    @user.password, @user.tmp_password = password, password
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

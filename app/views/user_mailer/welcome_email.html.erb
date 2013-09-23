@@ -1,0 +1,22 @@
+<h3>
+  Welcome <%=@user.first_name%> <%=@user.last_name%>,
+</h3>
+<br>
+<div>
+  Welcome to Expense web app,
+</div>
+<div>
+  Your account credentials are:<br/>
+  Email: <b> <%=@user.email%></b><br/>
+  Password: <b> <%=@password%></b><br/>
+  <%= link_to "Click Here", root_url %>  to access your account.
+  <br/>
+  <br/>
+</div>
+We request you to change your password after logging in for first time.<br/>
+DO NOT REPLY TO THIS MESSAGE
+<p>Yours Sincerely,<br/>
+Expense Team</p>
+</div>
+
+

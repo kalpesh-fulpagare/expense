@@ -1,4 +1,4 @@
-<%- model_class = Group -%>
+<%- model_class = User -%>
 <div class="page-header">
   <h3>Create a User</h3>
 </div>
@@ -32,12 +32,6 @@
     <%= f.label :email, :class => 'col-lg-2 control-label' %>
     <div class="col-lg-10">
       <%= f.text_field :email, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :password, :class => 'col-lg-2 control-label' %>
-    <div class="col-lg-10">
-      <%= f.password_field :password, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group well">
