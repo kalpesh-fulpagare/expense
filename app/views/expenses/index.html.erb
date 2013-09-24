@@ -1,5 +1,6 @@
 <div class="page-header">
-  <h3>Expenses</h3>
+  <strong>Expenses</strong>
+  <small class='pull-right'><%= link_to "Add new Expense", new_expense_path, :class => 'btn btn-primary btn-sm pull-right' %></small>
 </div>
 <table class="table table-striped table-bordered">
   <thead>
@@ -37,4 +38,3 @@
   </tbody>
 </table>
 <%= paginate @expenses %>
-<%= link_to t('.new', :default => t("helpers.links.new")), new_expense_path, :class => 'btn btn-primary' %>
