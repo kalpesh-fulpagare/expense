@@ -8,6 +8,9 @@
       <th>ID</th>
       <th>Reading</th>
       <th>Reading Date</th>
+      <% if current_user.is_admin %>
+        <th>Actions</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +19,9 @@
         <td><%= link_to meter_reading.id, edit_meter_reading_path(meter_reading) %></td>
         <td><%= meter_reading.reading %></td>
         <td><%= meter_reading.date %></td>
+        <% if current_user.is_admin %>
+          <td><%= link_to "Delete", meter_reading_path(meter_reading), method: :delete, confirm: "Are you sure?", class: "btn btn-sm btn-danger" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

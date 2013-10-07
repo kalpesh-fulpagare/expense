@@ -13,7 +13,7 @@ class MeterReadingsController < ApplicationController
   def create
     @meter_reading = MeterReading.new(meter_reading_params)
     if @meter_reading.save
-      redirect_to meter_readinga_path, notice: 'Meter reading was successfully created.'
+      redirect_to meter_readings_path, notice: 'Meter reading was successfully created.'
     else
       render action: "new"
     end
