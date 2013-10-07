@@ -40,7 +40,7 @@
   <script type="text/javascript">
   $("#new_user").bind("submit", function(){
     if($.trim($("#user_login").val()) == ""){
-      displayFlash("Please enter login detail", 'alert-error');
+      displayFlash("Please enter login detail", 'alert-danger');
       return false;
     }
     // else if(!(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test($("#user_email").val())){
@@ -48,7 +48,7 @@
     //   return false;
     // }
     else if ($("#user_password").val() == ""){
-      displayFlash("Please enter password", 'alert-error');
+      displayFlash("Please enter password", 'alert-danger');
       return false;
     }
     toggleDoms($(".formLoader"), $(".formSubmit"));
