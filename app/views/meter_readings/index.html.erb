@@ -1,0 +1,22 @@
+<div class="page-header">
+  <strong>Meter Reading</strong>
+  <small class='pull-right'><%= link_to "Add new Meter Reading", new_meter_reading_path, :class => 'btn btn-primary btn-sm pull-right' %></small>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Reading</th>
+      <th>Reading Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meter_readings.each do |meter_reading| %>
+      <tr>
+        <td><%= link_to meter_reading.id, edit_meter_reading_path(meter_reading) %></td>
+        <td><%= meter_reading.reading %></td>
+        <td><%= meter_reading.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

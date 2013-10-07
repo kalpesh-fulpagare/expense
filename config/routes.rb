@@ -1,4 +1,7 @@
 RailsApp::Application.routes.draw do
+  resources :meter_readings
+
+
   resources :groups
 
 
