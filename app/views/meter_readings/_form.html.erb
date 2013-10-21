@@ -19,7 +19,7 @@
   <div class="form-group">
     <label class="col-lg-3 control-label" for="meter_reading_last_reading">Last meter reading</label>
     <div class="col-lg-9 input-group">
-      <%= f.text_field :last_reading, class: "form-control" %>
+      <%= f.text_field :last_reading, class: "form-control", value: @meter_reading.last_meter_reading %>
     </div>
   </div>
   <div class="form-group">
@@ -30,9 +30,9 @@
   </div>
   <div class="form-group">
     <label class="col-lg-3 control-label" for="meter_reading_date">Reading date</label>
-    <div class="col-lg-9 input-group">
+    <div class="col-lg-9 input-group input-append date">
       <%= f.text_field :date, class: "datepicker form-control", value: @meter_reading.date.try(:strftime, "%d-%b-%Y"), readonly: true %>
-      <span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span>
+      <!--span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span-->
     </div>
   </div>
 
@@ -49,6 +49,6 @@
 <%- content_for :js do %>
   <%= javascript_include_tag "datepicker" %>
   <script type="text/javascript">
-    $(".datepicker").datepicker({format: 'dd-M-yyyy', endDate: "+0d", startDate: '-30d'});
+    $(".datepicker").datepicker({format: 'dd-M-yyyy', endDate: "+0d", startDate: '-30d', autoclose: true, todayHighlight: true});
   </script>
 <% end %>
