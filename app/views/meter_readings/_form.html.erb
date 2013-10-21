@@ -4,15 +4,33 @@
 <%= form_for @meter_reading , :html => {role: "form", :class => 'form-horizontal' } do |f| %>
   <%= html_errors @meter_reading %>
 
+   <div class="form-group">
+    <label class="col-lg-3 control-label" for="meter_reading_rent">Rent (e.g. 3500)</label>
+    <div class="col-lg-9 input-group">
+      <%= f.text_field :rent, class: "form-control" %>
+    </div>
+  </div>
   <div class="form-group">
-    <%= f.label :reading, :class => 'col-lg-2 control-label' %>
-    <div class="col-lg-10 input-group">
+    <label class="col-lg-3 control-label" for="meter_reading_unit_rate">Rs per Unit (e.g. 8Rs/unit)</label>
+    <div class="col-lg-9 input-group">
+      <%= f.text_field :unit_rate, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-3 control-label" for="meter_reading_last_reading">Last meter reading</label>
+    <div class="col-lg-9 input-group">
+      <%= f.text_field :last_reading, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-3 control-label" for="meter_reading_reading">Current meter reading</label>
+    <div class="col-lg-9 input-group">
       <%= f.text_field :reading, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
-      <%= f.label :date, :class => 'col-lg-2 control-label' %>
-    <div class="col-lg-10 input-group">
+    <label class="col-lg-3 control-label" for="meter_reading_date">Reading date</label>
+    <div class="col-lg-9 input-group">
       <%= f.text_field :date, class: "datepicker form-control", value: @meter_reading.date.try(:strftime, "%d-%b-%Y"), readonly: true %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span>
     </div>
@@ -20,7 +38,7 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-default' %>
+      <%= f.submit "Save rent datails", :class => 'btn btn-default' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 meter_readings_path, :class => 'btn' %>
     </div>

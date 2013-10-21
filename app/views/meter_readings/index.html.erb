@@ -6,8 +6,14 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Reading</th>
+      <th>Last Reading</th>
+      <th>Current Reading</th>
       <th>Reading Date</th>
+      <th>Rupee/Unit</th>
+      <th>Rent</th>
+      <th>Total Rent</th>
+      <th>Individual Rent Amt</th>
+      <th>Units Consumed</th>
       <% if current_user.is_admin %>
         <th>Actions</th>
       <% end %>
@@ -17,8 +23,14 @@
     <% @meter_readings.each do |meter_reading| %>
       <tr>
         <td><%= link_to meter_reading.id, edit_meter_reading_path(meter_reading) %></td>
-        <td><%= meter_reading.reading %></td>
+        <td class='lastReading'><%= meter_reading.last_reading %></td>
+        <td class='currentReading'><%= meter_reading.reading %></td>
         <td><%= meter_reading.date %></td>
+        <td class='unitRate'><%= meter_reading.unit_rate %></td>
+        <td class='rent'><%= meter_reading.rent %></td>
+        <td class='totalRent'></td>
+        <td class='individualRent'></td>
+        <td class='units'></td>
         <% if current_user.is_admin %>
           <td><%= link_to "Delete", meter_reading_path(meter_reading), method: :delete, confirm: "Are you sure?", class: "btn btn-sm btn-danger" %></td>
         <% end %>
@@ -26,3 +38,22 @@
     <% end %>
   </tbody>
 </table>
+
+<%= content_for :js do %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var totalRent, unitRate, lastReading, currentReading, rent;
+    $("table tbody tr").each(function(){
+      unitRate = parseInt($(this).find(".unitRate").html());
+      lastReading = parseInt($(this).find(".lastReading").html());
+      currentReading = parseInt($(this).find(".currentReading").html());
+      rent= parseInt($(this).find(".rent").html());
+      totalRent = rent + (unitRate * (currentReading - lastReading));
+      console.log(totalRent)
+      $(this).find(".totalRent").html(totalRent);
+      $(this).find(".individualRent").html(totalRent / 2);
+      $(this).find(".units").html((currentReading - lastReading));
+    });
+  });
+  </script>
+<% end %>

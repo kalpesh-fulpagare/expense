@@ -2,7 +2,7 @@ class MeterReadingsController < ApplicationController
   before_filter :find_meter_reading, only: [:edit, :update, :destroy]
 
   def index
-    @meter_readings = MeterReading.limit(20)
+    @meter_readings = MeterReading.limit(5)
   end
 
 
@@ -13,7 +13,7 @@ class MeterReadingsController < ApplicationController
   def create
     @meter_reading = MeterReading.new(meter_reading_params)
     if @meter_reading.save
-      redirect_to meter_readings_path, notice: 'Meter reading was successfully created.'
+      redirect_to meter_readings_path, notice: 'Rent Detail was successfully created.'
     else
       render action: "new"
     end
@@ -22,7 +22,7 @@ class MeterReadingsController < ApplicationController
 
   def update
     if @meter_reading.update_attributes(meter_reading_params)
-      redirect_to meter_readings_path, notice: 'Meter reading was successfully updated.'
+      redirect_to meter_readings_path, notice: 'Rent Detail was successfully updated.'
     else
       render action: "edit"
     end
@@ -38,6 +38,6 @@ class MeterReadingsController < ApplicationController
   private
 
     def meter_reading_params
-      params.require(:meter_reading).permit(:date, :reading)
+      params.require(:meter_reading).permit(:date, :reading, :rent, :unit_rate, :last_reading)
     end
 end
