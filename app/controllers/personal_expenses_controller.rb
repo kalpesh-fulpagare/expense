@@ -15,19 +15,11 @@ class PersonalExpensesController < ApplicationController
 
   def create
     @personal_expense = current_user.personal_expenses.new(personal_expense_params)
-    if @personal_expense.save
-      redirect_to edit_personal_expense_path(@personal_expense), notice: 'Personal Expense was successfully created.'
-    else
-      render "new"
-    end
+    @personal_expense.save
   end
 
   def update
-    if @personal_expense.update_attributes(personal_expense_params)
-      redirect_to edit_personal_expense_path(@personal_expense), notice: 'Personal Expense was successfully updated.'
-    else
-      render "edit"
-    end
+    @personal_expense.update_attributes(personal_expense_params)
   end
 
   def destroy

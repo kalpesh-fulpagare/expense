@@ -12,11 +12,7 @@ class ExpensesController < ApplicationController
   def create
     @expense = current_user.expenses.new(expense_params)
     @expense.group_id = current_user.group_id
-    if @expense.save
-      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.'
-    else
-      render action: "new"
-    end
+    @expense.save
   end
 
   def show
@@ -24,11 +20,7 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    if @expense.update_attributes(expense_params)
-      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully updated.'
-    else
-      render "edit"
-    end
+    @expense.update_attributes(expense_params)
   end
 
   def destroy

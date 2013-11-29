@@ -1,0 +1,6 @@
+<% if @expense.errors.any? %>
+  displayErrors("<%= j(@expense.errors.messages.to_json.html_safe) %>", "expense");
+<% else %>
+  <% flash[:notice] = 'Expense was successfully updated.' %>
+  window.location = "<%= edit_expense_path(@expense) %>";
+<% end %>

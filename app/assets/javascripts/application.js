@@ -19,6 +19,15 @@ var days = {1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat", 0: "Sun"
 $(document).ready(function(){
   $("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
   hideFlash();
+  $("form").submit(function(){
+    $(this).find("errorSpan").remove();
+  });
+  $("form input, form select").focus(function(){
+    if($(this).hasClass("hasError")){
+      $(this).removeClass("hasError");
+      $(this).next(".errorSpan").remove();
+    }
+  });
 });
 function toggleDoms(show, hide){
   show.show();
@@ -60,4 +69,27 @@ function filterRecords(filters, record_json){
     record_json = tmp_json;
   });
   return record_json;
+}
+function capitalise(txt) {
+  return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+}
+function displayErrors(jsonErrorHash, resourceName){
+  $(".errorSpan").remove();
+  errors = JSON.parse(jsonErrorHash);
+  $.each(errors, function(attr, error_array) {
+    $.each(error_array, function(index, error){
+      error_array[index] = capitalise(attr) + " " + error;
+    });
+    var errorString = error_array.join(", ");
+    errorDom = "<span class='errorSpan help-block'>" + errorString + "</span>";
+    var name = resourceName + "[" + attr + "]";
+    var el = $("[name^='" + name + "']");
+    if (el.prop("type") === "radio" || el.prop("type") === "checkbox") {
+      el.parents(".input-group:first").append(errorDom);
+    } else {
+      $(errorDom).insertAfter(el);
+      el.addClass("hasError");
+    }
+  });
+  $('html,body').animate({scrollTop: $(".errorSpan:visible").offset().top-50},'slow');
 }

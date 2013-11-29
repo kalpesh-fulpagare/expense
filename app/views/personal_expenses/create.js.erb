@@ -1,0 +1,6 @@
+<% if @personal_expense.errors.any? %>
+  displayErrors("<%= j(@personal_expense.errors.messages.to_json.html_safe) %>", "personal_expense");
+<% else %>
+  <% flash[:notice] = 'Personal Expense was successfully created.' %>
+  window.location = "<%= edit_personal_expense_path(@personal_expense) %>";
+<% end %>

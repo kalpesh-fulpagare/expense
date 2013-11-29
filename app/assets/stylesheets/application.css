@@ -39,3 +39,5 @@
 .p20{padding: 20px;}
 .p40{padding: 40px;}
 .panel-heading {cursor: pointer;}
+.errorSpan { color: red !important;}
+.hasError{border-color:#b94a48 !important;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075); background-image: -webkit-gradient(linear,left 0,left 100%,from(#f2dede),to(#e7c3c3));}
