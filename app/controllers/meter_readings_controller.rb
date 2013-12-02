@@ -2,7 +2,7 @@ class MeterReadingsController < ApplicationController
   before_filter :find_meter_reading, only: [:edit, :update, :destroy]
 
   def index
-    @meter_readings = MeterReading.limit(5).order("created at DESC")
+    @meter_readings = MeterReading.limit(5).order("created_at DESC")
   end
 
 
