@@ -1,0 +1,6 @@
+<% if @meter_reading.errors.any? %>
+  displayErrors("<%= j(@meter_reading.errors.messages.to_json.html_safe) %>", "meter_reading");
+<% else %>
+  <% flash[:notice] = 'Rent Details are successfully saved.' %>
+  window.location = "<%= meter_readings_path %>";
+<% end %>

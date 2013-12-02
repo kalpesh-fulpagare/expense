@@ -70,15 +70,17 @@ function filterRecords(filters, record_json){
   });
   return record_json;
 }
-function capitalise(txt) {
-  return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+function humanize(txt) {
+  var newText = txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+  newText = newText.replace(/_/g, ' ');
+  return newText;
 }
 function displayErrors(jsonErrorHash, resourceName){
   $(".errorSpan").remove();
   errors = JSON.parse(jsonErrorHash);
   $.each(errors, function(attr, error_array) {
     $.each(error_array, function(index, error){
-      error_array[index] = capitalise(attr) + " " + error;
+      error_array[index] = humanize(attr) + " " + error;
     });
     var errorString = error_array.join(", ");
     errorDom = "<span class='errorSpan help-block'>" + errorString + "</span>";

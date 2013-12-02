@@ -12,20 +12,12 @@ class MeterReadingsController < ApplicationController
 
   def create
     @meter_reading = MeterReading.new(meter_reading_params)
-    if @meter_reading.save
-      redirect_to meter_readings_path, notice: 'Rent Detail was successfully created.'
-    else
-      render action: "new"
-    end
+    @meter_reading.save
   end
 
 
   def update
-    if @meter_reading.update_attributes(meter_reading_params)
-      redirect_to meter_readings_path, notice: 'Rent Detail was successfully updated.'
-    else
-      render action: "edit"
-    end
+    @meter_reading.update_attributes(meter_reading_params)
   end
 
 

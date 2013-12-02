@@ -8,21 +8,11 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    if @category.save
-      redirect_to categories_path, notice: 'Category was successfully created.'
-    else
-      render action: "new"
-    end
+    @category.save
   end
 
   def update
-    respond_to do |format|
-      if @category.update_attributes(category_params)
-        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
-      else
-        format.html { render action: "edit" }
-      end
-    end
+    @category.update_attributes(category_params)
   end
 
   def destroy

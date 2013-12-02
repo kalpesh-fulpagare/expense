@@ -1,0 +1,6 @@
+<% if @category.errors.any? %>
+  displayErrors("<%= j(@category.errors.messages.to_json.html_safe) %>", "category");
+<% else %>
+  <% flash[:notice] = 'Category was successfully updated.' %>
+  window.location = "<%= edit_category_path(@category) %>";
+<% end %>
