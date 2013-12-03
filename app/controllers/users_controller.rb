@@ -18,19 +18,11 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def create
+  def invite
     password = SecureRandom.hex[0,8]
     @user = User.new(params[:user])
     @user.password, @user.tmp_password = password, password
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    @user.save
   end
 
   def update

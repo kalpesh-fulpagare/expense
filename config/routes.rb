@@ -20,6 +20,9 @@ RailsApp::Application.routes.draw do
     member do
       put 'change_password'
     end
+    collection do
+      post "invite"
+    end
   end
   resource :dashboard
   match 'users/:id/change_password' => 'users#edit'

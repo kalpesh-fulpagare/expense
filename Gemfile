@@ -16,19 +16,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   # Add Foundation Here
   gem 'compass-rails' # you need this or you get an err
-  gem 'turbo-sprockets-rails3'
 end
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
-
+gem 'haml'
 gem 'jquery-rails', '2.2.1'
 gem 'devise', '3.0.1'
-group :test do
-  gem 'cucumber-rails', :require => false
-  # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner'
-end
+gem 'kaminari'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -45,6 +40,7 @@ end
 # To use debugger
 group :development do
   gem 'debugger'
+  gem 'thin'
   gem 'meta_request'
 end
 # This version needs to be hardcoded for OpenShift compatibility
@@ -53,4 +49,3 @@ gem 'strong_parameters', "0.2.1"
 
 # This needs to be installed so we can run Rails console on OpenShift directly
 gem 'minitest'
-gem 'kaminari'

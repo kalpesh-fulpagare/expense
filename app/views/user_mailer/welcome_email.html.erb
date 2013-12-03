@@ -1,20 +1,26 @@
 <h3>
-  Welcome <%=@user.first_name%> <%=@user.last_name%>,
+  Hey <%=@user.first_name%> <%=@user.last_name%>,
 </h3>
-<br>
 <div>
-  Welcome to Expense web app,
+  Welcome to <a href='http://<%= root_url %>'>Expense</a> web application,
 </div>
 <div>
   Your account credentials are:<br/>
-  Email: <b> <%=@user.email%></b><br/>
-  Password: <b> <%=@password%></b><br/>
+  Email: <b> <%= @user.email %></b><br/>
+  Username: <b><%= @user.username %></b><br/>
+  Password: <b> <%= @password %></b><br/>
   <%= link_to "Click Here", root_url %>  to access your account.
   <br/>
   <br/>
+<div>
+  You can use any of username OR email to login to your account!
 </div>
-We request you to change your password after logging in for first time.<br/>
+</div>
+We request you to change your password after logging in for first time.
+<br/>
 DO NOT REPLY TO THIS MESSAGE
+<br/>
+<br/>
 <p>Yours Sincerely,<br/>
 Expense Team</p>
 </div>

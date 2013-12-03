@@ -1,0 +1,6 @@
+<% if @user.errors.any? %>
+  displayErrors("<%= j(@user.errors.messages.to_json.html_safe) %>", "user");
+<% else %>
+  <% flash[:notice] = 'User successfully created.' %>
+  window.location = "/users";
+<% end %>

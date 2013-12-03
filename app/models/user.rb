@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessor :login, :current_password, :tmp_password
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :username, :login, :current_password
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :username, :login, :current_password, :group_id
 
   # Validations
   validates :username, presence: true, uniqueness: true
-  validates :first_name, :first_name, presence: true
+  validates :first_name, :last_name, presence: true
 
   # Associations
   has_many :expenses
@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
 
   private
   def welcome_email
-    #UserMailer.delay.welcome_email(self, self.tmp_password) unless self.is_admin
-    UserMailer.welcome_email(self, self.tmp_password).deliver unless self.is_admin
+    UserMailer.welcome_email(self, self.tmp_password).deliver if !self.is_admin && self.tmp_password.present?
   end
 end
