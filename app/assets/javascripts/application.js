@@ -25,7 +25,7 @@ $(document).ready(function(){
   $("form input, form select").focus(function(){
     if($(this).hasClass("hasError")){
       $(this).removeClass("hasError");
-      $(this).next(".errorSpan").remove();
+      $(this).next(".errorSpan").hide(500);
     }
   });
 });
