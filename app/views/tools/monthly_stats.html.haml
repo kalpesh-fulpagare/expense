@@ -1,0 +1,34 @@
+.page-header
+  %h4= "Amount stats for year #{params[:year]}"
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Month
+      %th Details
+  %tbody
+    - @system_setting.value.each do |month, exp_stats|
+      %tr
+        %td= month
+        %td
+          %table.table.table-bordered
+            - total = 0
+            - exp_stats.each do |user_id, cost|
+              - total = total + cost
+              %tr.statsData
+                %td= display_name User.find(user_id)
+                %td= cost
+            %tr
+              %td
+                %strong Total
+              %td
+                %strong= total
+            %tr
+              %td{colspan: 2}
+
+
+= content_for :right_sidebar do
+  .panel
+    .panel-body
+      = link_to "Calculate last month Stats", "/tools/calculate_stats", class: "btn btn-primary"
+    .panel-body
+      = link_to "Last year records", "/tools/monthly_stats?year=#{Time.now.year - 1}", class: "btn btn-primary"

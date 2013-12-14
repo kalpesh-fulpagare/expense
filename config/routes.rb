@@ -25,6 +25,10 @@ RailsApp::Application.routes.draw do
     end
   end
   resource :dashboard
+  resource :tools, only: [] do
+    get 'monthly_stats', on: :collection
+    get 'calculate_stats', on: :collection
+  end
   match 'users/:id/change_password' => 'users#edit'
 
   # devise_for :users
