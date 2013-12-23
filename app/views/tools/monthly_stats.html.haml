@@ -13,6 +13,7 @@
           %table.table.table-bordered
             - total = 0
             - exp_stats.each do |user_id, cost|
+              - next unless user_id.class == Fixnum
               - total = total + cost
               %tr.statsData
                 %td= display_name User.find(user_id)
@@ -23,7 +24,14 @@
               %td
                 %strong= total
             %tr
-              %td{colspan: 2}
+              %td Settlement status
+              %td
+                - if exp_stats['status'] == 'Incomplete'
+                  %span.label.label-warning= exp_stats['status']
+                  = link_to "Change to Complete", update_stats_tools_path(name: @system_setting.name, month: month), class: "pull-right btn btn-success btn-xs", method: "PUT"
+                - else
+                  %span.label.label-success= exp_stats['status']
+
 
 
 = content_for :right_sidebar do

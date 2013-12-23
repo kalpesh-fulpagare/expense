@@ -28,6 +28,7 @@ RailsApp::Application.routes.draw do
   resource :tools, only: [] do
     get 'monthly_stats', on: :collection
     get 'calculate_stats', on: :collection
+    put 'update_stats', on: :collection
   end
   match 'users/:id/change_password' => 'users#edit'
 

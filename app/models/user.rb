@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   def update_cache_time
     ss = SystemSetting.find_by_name("cache")
+    return unless ss
     ss.value['user'] = Time.now.utc.to_s.gsub!(/[ : +-]+/,'_')
     ss.update_attribute(:value, ss.value)
   end

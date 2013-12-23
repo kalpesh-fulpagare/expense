@@ -11,6 +11,13 @@ class SystemSetting < ActiveRecord::Base
       ss
     end
 
+    def update_settlement params
+      ss = SystemSetting.find_by_name("#{params[:name]}")
+      return unless ss
+      ss.value[params[:month]]['status'] = "Complete"
+      ss.save
+    end
+
     def calculate_last_settlement user
       if user.group_id
         user_ids = User.where(:group_id => user.group_id).pluck(:id)
@@ -21,6 +28,7 @@ class SystemSetting < ActiveRecord::Base
           record[e.user_id] = e.cost
           record
         end
+        record["status"] = "Incomplete"
         ss = find_settlement date.year
         ss.value[date.strftime("%B")] = record
         ss.update_attribute(:value, ss.value)
