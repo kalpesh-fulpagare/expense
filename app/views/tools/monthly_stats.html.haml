@@ -41,8 +41,8 @@
 = content_for :js do
   :coffeescript
     $(document).ready ->
-      txtMessages = [" needs to contribute Rs ", " should get Rs "]
       $(".statsTable").each ->
+        txtMessages = [" needs to contribute Rs ", " should get Rs "]
         total = parseInt $(this).find(".expenseTotal").text()
         member = $(this).find(".userExpense").length
         status = $(this).find(".status .label-success").length
