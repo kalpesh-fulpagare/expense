@@ -30,6 +30,7 @@ class SystemSetting < ActiveRecord::Base
         end
         record["status"] = "Incomplete"
         ss = find_settlement date.year
+        record["status"] = ss.value.has_key?(date.strftime("%B")) ? ss.value[date.strftime("%B")]['status'] : "Incomplete"
         ss.value[date.strftime("%B")] = record
         ss.update_attribute(:value, ss.value)
       end

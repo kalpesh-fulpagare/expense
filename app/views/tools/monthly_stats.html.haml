@@ -1,6 +1,6 @@
 .page-header
   %h4= "Amount stats for year #{params[:year]}"
-%table.table.table-striped.table-bordered
+%table.table.table-bordered
   %thead
     %tr
       %th Month
@@ -10,29 +10,27 @@
       %tr
         %td= month
         %td
-          %table.table.table-bordered
+          %table.table.table-bordered.statsTable
             - total = 0
             - exp_stats.each do |user_id, cost|
               - next unless user_id.class == Fixnum
               - total = total + cost
               %tr.statsData
-                %td= display_name User.find(user_id)
-                %td= cost
+                %td.userName= display_name User.find(user_id)
+                %td.userExpense= cost
             %tr
               %td
                 %strong Total
               %td
-                %strong= total
+                %strong.expenseTotal= total
             %tr
               %td Settlement status
-              %td
+              %td.status
                 - if exp_stats['status'] == 'Incomplete'
                   %span.label.label-warning= exp_stats['status']
                   = link_to "Change to Complete", update_stats_tools_path(name: @system_setting.name, month: month), class: "pull-right btn btn-success btn-xs", method: "PUT"
                 - else
                   %span.label.label-success= exp_stats['status']
-
-
 
 = content_for :right_sidebar do
   .panel
@@ -40,3 +38,25 @@
       = link_to "Calculate last month Stats", "/tools/calculate_stats", class: "btn btn-primary"
     .panel-body
       = link_to "Last year records", "/tools/monthly_stats?year=#{Time.now.year - 1}", class: "btn btn-primary"
+= content_for :js do
+  :coffeescript
+    $(document).ready ->
+      $(".statsTable").each ->
+        txtMessages = [" needs to contribute Rs ", " should get Rs "]
+        total = parseInt $(this).find(".expenseTotal").text()
+        member = $(this).find(".userExpense").length
+        status = $(this).find(".status .label-success").length
+        if status is 1
+          txtMessages = [" have additionally contributed Rs ", " have got Rs "]
+        eachMemberCost = total / member
+        table = "<table class='table table-bordered statsTable'><tbody>"
+        $(this).find(".statsData").each ->
+          contro = eachMemberCost - parseInt($(this).find(".userExpense").text())
+          userName = $(this).find(".userName").text()
+          if contro > 0
+            table += "<tr class='danger'><td>" + userName + txtMessages[0] + contro + "</td></tr>"
+          else if contro < 0
+            table += "<tr class='success'><td>" + userName + txtMessages[1] + (0 - contro) + "</td></tr>"
+        table += "</tbody></table>"
+        $(this).parent().append(table)
+
