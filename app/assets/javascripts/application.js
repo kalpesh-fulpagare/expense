@@ -17,7 +17,7 @@ var flashTimer;
 var months = {0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "June", 6: "July", 7: "Aug", 8: "Sept", 9: "Oct", 10: "Nov", 11: "Dec"}
 var days = {1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat", 0: "Sun"}
 $(document).ready(function(){
-  $("nav.navbar .navbar-collapse ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
+  $("nav.navbar .navbar-collapse ul.nav li[rel='" + $.trim($(".activeTab").text()) + "']").addClass("active");
   hideFlash();
   $("form").submit(function(){
     $(this).find("errorSpan").remove();

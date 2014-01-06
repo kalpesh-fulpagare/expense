@@ -39,6 +39,7 @@
   </tbody>
 </table>
 
+<%= content_for :active_tab, "tools" %>
 <%= content_for :js do %>
   <script type="text/javascript">
   $(document).ready(function(){
@@ -49,7 +50,6 @@
       currentReading = parseInt($(this).find(".currentReading").html());
       rent= parseInt($(this).find(".rent").html());
       totalRent = rent + (unitRate * (currentReading - lastReading));
-      console.log(totalRent)
       $(this).find(".totalRent").html(totalRent);
       $(this).find(".individualRent").html(totalRent / 2);
       $(this).find(".units").html((currentReading - lastReading));
