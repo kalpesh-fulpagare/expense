@@ -8,7 +8,8 @@
   %tbody
     - @system_setting.value.each do |month, exp_stats|
       %tr
-        %td= month
+        %td
+          %strong= month
         %td
           %table.table.table-bordered.statsTable
             - total = 0

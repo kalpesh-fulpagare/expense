@@ -22,7 +22,7 @@ class Expense < ActiveRecord::Base
     def dashboard_expenses(user)
       expenses = select("id, title, description, category_id, user_id, date, cost, MONTH(date) AS month")
       expenses = expenses.where("group_id = ?", user.group_id) if user.group_id.present?
-      expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 2 MONTH)").order("date DESC, updated_at DESC")
+      expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 1 MONTH)").order("date DESC, updated_at DESC")
       expenses
     end
 
