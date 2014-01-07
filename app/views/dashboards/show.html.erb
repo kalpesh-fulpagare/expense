@@ -19,10 +19,10 @@
   <%= render "shared/filter" %>
 <% end %>
 <%= content_for :js do %>
-  <%= javascript_include_tag "dashboard" %>
   <script type="text/javascript">
     users_json = <%= @users.group_by(&:id).to_json.html_safe %>
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @expenses.to_json.html_safe %>
   </script>
+  <%= javascript_include_tag "dashboard" %>
 <% end %>

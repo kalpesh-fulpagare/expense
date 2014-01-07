@@ -14,7 +14,7 @@ Total: <strong>0</strong>
       <%- next unless @category_ids.include? c.id %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="category_id" value="<%= c.id %>">
+          <input type="checkbox" filter_name="category_id" value="<%= c.id %>" filter_type='int'>
           <%= c.name %>
         </label>
       </div>
@@ -35,7 +35,7 @@ Total: <strong>0</strong>
       <% @users.each do |u| %>
         <div class="checkbox">
           <label>
-            <input type="checkbox" filter_name="user_id" value="<%= u.id %>">
+            <input type="checkbox" filter_name="user_id" value="<%= u.id %>" filter_type="int">
             <%= display_name u %>
           </label>
         </div>
@@ -56,7 +56,7 @@ Total: <strong>0</strong>
     <% @months.each do |month| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" filter_name="month" value="<%= month %>">
+          <input type="checkbox" filter_name="month" value="<%= month %>" filter_type='int'>
           <%= Date::MONTHNAMES[month] %>
         </label>
       </div>

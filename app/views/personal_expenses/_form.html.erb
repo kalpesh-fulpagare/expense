@@ -45,8 +45,5 @@
   </div>
 <% end %>
 <%- content_for :js do %>
-  <%= javascript_include_tag "datepicker" %>
-  <script type="text/javascript">
-    $(".datepicker").datepicker({format: 'dd-M-yyyy', endDate: "+0d", startDate: '-30d', autoclose: true, todayHighlight: true});
-  </script>
+  <%= javascript_include_tag "expenses" %>
 <% end %>

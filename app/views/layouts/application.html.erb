@@ -97,7 +97,7 @@
     <div class="activeTab dn">
       <%= content_for?(:active_tab) ? yield(:active_tab) : params[:controller] %>
     </div>
-    <%= javascript_include_tag "application" %>
-    <%= yield :js %>
+    <%= content_for?(:js) ? yield(:js) : javascript_include_tag("application") %>
+    <%= yield(:javascript)%>
   </body>
 </html>
