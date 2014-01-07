@@ -8,7 +8,7 @@ RailsApp::Application.routes.draw do
   authenticated :user do
     root to: "dashboards#show"
   end
-  devise_for :users
+  devise_for :users, skip: [:registrations]
   devise_scope :user do
     root to: "devise/sessions#new"
   end
