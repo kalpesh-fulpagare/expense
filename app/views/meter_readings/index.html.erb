@@ -39,21 +39,21 @@
   </tbody>
 </table>
 
-<%= content_for :js do %>
+<%= content_for :active_tab, "tools" %>
+<%= content_for :javascript do %>
   <script type="text/javascript">
-  $(document).ready(function(){
-    var totalRent, unitRate, lastReading, currentReading, rent;
-    $("table tbody tr").each(function(){
-      unitRate = parseInt($(this).find(".unitRate").html());
-      lastReading = parseInt($(this).find(".lastReading").html());
-      currentReading = parseInt($(this).find(".currentReading").html());
-      rent= parseInt($(this).find(".rent").html());
-      totalRent = rent + (unitRate * (currentReading - lastReading));
-      console.log(totalRent)
-      $(this).find(".totalRent").html(totalRent);
-      $(this).find(".individualRent").html(totalRent / 2);
-      $(this).find(".units").html((currentReading - lastReading));
+    $(document).ready(function(){
+      var totalRent, unitRate, lastReading, currentReading, rent;
+      $("table tbody tr").each(function(){
+        unitRate = parseInt($(this).find(".unitRate").html());
+        lastReading = parseInt($(this).find(".lastReading").html());
+        currentReading = parseInt($(this).find(".currentReading").html());
+        rent= parseInt($(this).find(".rent").html());
+        totalRent = rent + (unitRate * (currentReading - lastReading));
+        $(this).find(".totalRent").html(totalRent);
+        $(this).find(".individualRent").html(totalRent / 2);
+        $(this).find(".units").html((currentReading - lastReading));
+      });
     });
-  });
   </script>
 <% end %>

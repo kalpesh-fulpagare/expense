@@ -21,7 +21,7 @@
   <%= render "shared/filter" %>
 <% end %>
 <%= content_for :js do %>
-  <%= javascript_include_tag "personal_expenses" %>
+  <%= javascript_include_tag "personal_expenses.js" %>
   <script type="text/javascript">
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @personal_expenses.to_json.html_safe %>

@@ -8,7 +8,8 @@
   %tbody
     - @system_setting.value.each do |month, exp_stats|
       %tr
-        %td= month
+        %td
+          %strong= month
         %td
           %table.table.table-bordered.statsTable
             - total = 0
@@ -38,7 +39,7 @@
       = link_to "Calculate last month Stats", "/tools/calculate_stats", class: "btn btn-primary"
     .panel-body
       = link_to "Last year records", "/tools/monthly_stats?year=#{Time.now.year - 1}", class: "btn btn-primary"
-= content_for :js do
+= content_for :javascript do
   :coffeescript
     $(document).ready ->
       $(".statsTable").each ->

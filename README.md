@@ -108,7 +108,5 @@ will be the same.
 
 TO SSH: ssh 521c38b55973ca27d9000001@expense-kalpeshonrails.rhcloud.com
 
-expense
-=======
 
 An Expense App for tracking Daily Expenses as well as Expenses between Group of Users
