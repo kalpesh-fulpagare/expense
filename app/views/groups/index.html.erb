@@ -19,7 +19,6 @@
         <td><%- group.users.each do |u| %> <%= link_to(display_name(u), u) %> <% end %></td>
         <td>
           <a href="/groups/<%= group.id %>/edit" class="btn btn-sm btn-default">Edit</a>
-          <a href="/groups/<%= group.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
         </td>
       </tr>
     <% end %>

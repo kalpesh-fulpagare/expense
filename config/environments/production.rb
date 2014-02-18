@@ -63,10 +63,10 @@ RailsApp::Application.configure do
   config.action_mailer.default_url_options = { :host => 'expense-kalpeshonrails.rhcloud.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: 'smtp.mailgun.org',
     port: 587,
-    domain: 'mail.google.com',
-    user_name: 'rubyonrailsapp@gmail.com',
+    domain: 'smtp.mailgun.org',
+    user_name: 'postmaster@sandbox60733.mailgun.org',
     password: '',
     authentication: 'plain',
     enable_starttls_auto: true }

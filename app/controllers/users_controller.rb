@@ -45,8 +45,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    redirect_to users_url
+    # @user.destroy
+    # redirect_to users_url
   end
 
   def require_admin_or_owner!
