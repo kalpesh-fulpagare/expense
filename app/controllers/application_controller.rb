@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       # @categories = Rails.cache.fetch("dbCat#{system_setting.value['category']}", expires_in: 1.day) {
       #   Category.select("id, name, user_id").order("created_at DESC").to_a
       # }
-      @categories = Category.select("id, name, user_id, category_type").order("created_at DESC")
+      @categories = Category.select("id, name, user_id, is_expense, is_personal_expense").order("created_at DESC")
     end
   end
 
