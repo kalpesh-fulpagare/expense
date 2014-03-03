@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @expense = Expense.new
+    @expense = Expense.new(date: Date.today)
   end
 
   def create

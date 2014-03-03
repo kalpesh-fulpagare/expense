@@ -1,30 +1,34 @@
-<div class="page-header">
-  <h3>Categories</h3>
-</div>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Name</th>
-      <% if current_user.is_admin %>
-        <th>Actions</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= link_to category.id, edit_category_path(category) %></td>
-        <td><%= category.name %></td>
-        <% if current_user.is_admin %>
-          <td>
-            <a href="/categories/<%= category.id %>/edit" class="btn-default btn btn-sm">Edit</a>
-            <a href="/categories/<%= category.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
-          </td>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Categories
+    <a href="/categories/new" class="pull-right">Create new category</a>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <% if current_user.is_admin %>
+            <th>Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= link_to category.id, edit_category_path(category) %></td>
+            <td><%= category.name %></td>
+            <% if current_user.is_admin %>
+              <td>
+                <a href="/categories/<%= category.id %>/edit" class="btn-default btn btn-sm">Edit</a>
+                <a href="/categories/<%= category.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+              </td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<a href="/categories/new" class="btn btn-sm btn-primary">New</a>

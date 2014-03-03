@@ -2,8 +2,7 @@ class Category < ActiveRecord::Base
   attr_accessible :name, :user_id, :is_expense, :is_personal_expense
 
   # Validations
-  validates :name, :category_type, presence: true
-  validates :name, uniqueness: {scope: :category_type}
+  validates :name, presence: true, uniqueness: true
 
   # Associations
   has_many :expenses

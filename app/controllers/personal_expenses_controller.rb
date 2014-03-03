@@ -10,7 +10,7 @@ class PersonalExpensesController < ApplicationController
   end
 
   def new
-    @personal_expense = PersonalExpense.new
+    @personal_expense = PersonalExpense.new(date: Date.today)
   end
 
   def create
