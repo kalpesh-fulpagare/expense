@@ -62,14 +62,6 @@ RailsApp::Application.configure do
   config.active_support.deprecation = :notify
   config.action_mailer.default_url_options = { :host => 'expense.kalpeshonrails.in' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.mailgun.org',
-    port: 587,
-    domain: 'smtp.mailgun.org',
-    user_name: 'postmaster@sandbox60733.mailgun.org',
-    password: '',
-    authentication: 'plain',
-    enable_starttls_auto: true }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
