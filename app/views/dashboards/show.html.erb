@@ -24,5 +24,4 @@
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @expenses.to_json.html_safe %>
   </script>
-  <%= javascript_include_tag "dashboard" %>
 <% end %>

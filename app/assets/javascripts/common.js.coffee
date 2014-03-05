@@ -65,7 +65,7 @@ root.displayErrors = (jsonErrorHash, resourceName) ->
     scrollTop: $(".errorSpan:visible").offset().top - 50
   , "slow"
 
-$(document).ready ->
+$(document).on "page:change", ->
   $("nav.navbar .navbar-collapse ul.nav li[rel='" + $.trim($(".activeTab").text()) + "']").addClass "active"
   hideFlash()
   $("form").submit ->

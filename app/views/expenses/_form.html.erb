@@ -1,6 +1,3 @@
-<%- content_for :css do %>
-  <%= stylesheet_link_tag "datepicker", :media => "all" %>
-<% end %>
 <%= form_for @expense, remote: true, :html => {role: "form", :class => 'form-horizontal' } do |f| %>
   <%= html_errors @expense %>
   <div class="form-group">
@@ -43,6 +40,4 @@
     </div>
   </div>
 <% end %>
-<%- content_for :js do %>
-  <%= javascript_include_tag "expenses" %>
-<% end %>
+
