@@ -1,4 +1,5 @@
 <%= link_to "Add new Expense", new_expense_path, :class => 'btn btn-primary btn-sm' %>
+<div class='dn pageInfo'>expenses</div>
 <div class="page-header">
   <h4>Expenses for last 2 Months</h4>
 </div>
@@ -9,8 +10,8 @@
       <th>Title</th>
       <th>Description</th>
       <th>Category</th>
-      <th>Purchased by</th>
       <th>Date</th>
+      <th>Purchased by</th>
       <th>Cost</th>
     </tr>
   </thead>
@@ -18,7 +19,7 @@
 <%= content_for :right_sidebar do %>
   <%= render "shared/filter" %>
 <% end %>
-<%= content_for :js do %>
+<%= content_for :javascript do %>
   <script type="text/javascript">
     users_json = <%= @users.group_by(&:id).to_json.html_safe %>
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
