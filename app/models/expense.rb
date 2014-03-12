@@ -13,9 +13,13 @@ class Expense < ActiveRecord::Base
 
   class << self
     def fetch_expenses(user, params)
-      expenses = select("id, title, description, category_id, user_id, date, cost").includes(:user).includes(:category)
-      expenses = expenses.where("group_id = ?", user.group_id) if user.group_id.present?
-      expenses = expenses.order("date DESC, updated_at DESC").page(params[:page]).per(20)
+      expenses = select("id, title, description, category_id, user_id, date, cost")
+      expenses = expenses.where(group_id: user.group_id) if user.group_id.present?
+      expenses = expenses.where(category_id: params[:category_id]) if params[:category_id].present?
+      expenses = expenses.where(user_id: params[:user_id]) if params[:user_id].present?
+      expenses = expenses.where(date: params[:date].to_date) if params[:date].present?
+      expenses = expenses.where("title LIKE ?", "%" + params[:title] + "%") if params[:title].present?
+      expenses = expenses.order("date DESC, updated_at DESC").page(params[:page]).per(30)
       expenses
     end
 

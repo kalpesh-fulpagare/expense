@@ -11,10 +11,10 @@ addExpenses = (exp_json) ->
   category_name = undefined
   dt = undefined
   cost = 0
-  resource = $(".pageInfo").html()
+  resource = $(".pageData")
   $.each exp_json, (index, e) ->
     table_data += "<tr>"
-    table_data += "<td><a href='/#{resource}/" + e.id + "'>" + e.id + "</a></td>"
+    table_data += "<td><a href='/#{resource.data('page')}/" + e.id + "'>" + e.id + "</a></td>"
     table_data += "<td>" + e.title + "</td>"
     table_data += "<td>" + e.description.replace(/\r\n/g, "<br>") + "</td>"
     table_data += "<td>" + categories_json[e.category_id][0].name + "</td>"
@@ -22,14 +22,17 @@ addExpenses = (exp_json) ->
     dt = new Date(e.date.replace(/-/g, "/"))
     table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + " (" + days[dt.getDay()] + ")" + ", " + dt.getFullYear() + "</td>"
 
-    if resource is "expenses"
+    if resource.data('page') is "expenses" or resource.data('user') is "true"
       table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"
     else
       table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"  if is_admin
 
     table_data += "<td class='text-right'>" + e.cost + "</td>"
+    if resource.data('user') isnt null
+      table_data += "<td><a class='btn btn-default' href='/#{resource.data('page')}/#{e.id}/edit'>Edit</a></td>"
     table_data += "<tr>"
-  table_data += "<tr><td class='warning text-right' colspan='#{if resource is 'expenses' then 6 else 5}'>Total Cost</td><td class='success text-right'>" + cost + "</td></tr>"
+  if resource.data('user') is null
+    table_data += "<tr><td class='warning text-right' colspan='#{if resource.data('page') is 'expenses' then 6 else 5}'>Total Cost</td><td class='success text-right'>" + cost + "</td></tr>"
   $("#expenseTotal").html "Total: <strong>" + cost + "</strong>"
   $("#expensesTable").append table_data
 

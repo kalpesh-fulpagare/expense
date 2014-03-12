@@ -1,5 +1,5 @@
 <%= link_to "Add new personal Expense", new_personal_expense_path, :class => 'btn btn-primary btn-sm' %>
-<div class='dn pageInfo'>personal_expenses</div>
+<div class='dn pageData' data-page='personal_expenses'></div>
 <div class="page-header">
   <strong>Personal expenses for last three months</strong>
 </div>
@@ -23,8 +23,8 @@
 <% end %>
 <%= content_for :javascript do %>
   <script type="text/javascript">
-    categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     expenses_json = <%= @personal_expenses.to_json.html_safe %>
+    categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
     users_json = <%= @users.group_by(&:id).to_json.html_safe if @users %>
     is_admin = <%= current_user.is_admin %>
   </script>

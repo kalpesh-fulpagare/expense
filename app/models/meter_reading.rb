@@ -1,6 +1,6 @@
 class MeterReading < ActiveRecord::Base
   attr_accessible :date, :reading, :unit_rate, :rent, :last_reading
-  set_table_name "rent_details"
+  self.table_name = "rent_details"
 
   # Validations
   validates :reading, :date, :last_reading, :rent, presence: true

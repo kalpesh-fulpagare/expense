@@ -3,6 +3,8 @@ class ExpensesController < ApplicationController
 
   def index
     @expenses = Expense.fetch_expenses(current_user, params)
+    @users = User.select("id, first_name, last_name").where("id IN (?)", @expenses.map(&:user_id))
+    @category_ids = @expenses.map(&:category_id).uniq
   end
 
   def new
