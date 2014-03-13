@@ -28,10 +28,10 @@ addExpenses = (exp_json) ->
       table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"  if is_admin
 
     table_data += "<td class='text-right'>" + e.cost + "</td>"
-    if resource.data('user') isnt null
+    if resource.data('user') isnt undefined
       table_data += "<td><a class='btn btn-default' href='/#{resource.data('page')}/#{e.id}/edit'>Edit</a></td>"
     table_data += "<tr>"
-  if resource.data('user') is null
+  if resource.data('user') is undefined
     table_data += "<tr><td class='warning text-right' colspan='#{if resource.data('page') is 'expenses' then 6 else 5}'>Total Cost</td><td class='success text-right'>" + cost + "</td></tr>"
   $("#expenseTotal").html "Total: <strong>" + cost + "</strong>"
   $("#expensesTable").append table_data

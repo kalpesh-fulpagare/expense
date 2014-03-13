@@ -33,6 +33,7 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.png', :rel => 'shortcut icon' %>
+    <%= javascript_include_tag "application" %>
 
   </head>
   <body>
@@ -57,7 +58,6 @@
         <p class='text-center'>&copy; ExpenseApp by Kalpesh <%= Time.now.year %></p>
       </footer>
     </div> <!-- /container -->
-    <%= javascript_include_tag "application" %>
     <%= yield :js %>
   </body>
 </html>
