@@ -4,100 +4,95 @@
 </div>
 <div class='dn pageData' data-page='expenses' data-user='true'></div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">Expenses search Filters</div>
-  <div class="panel-body">
-    <%= form_tag expenses_path, method: :get, class: "form-horizontal searchForm", role: "form" do %>
-      <table class='table table-condensed'>
-        <tbody>
-          <tr>
-            <th>Title</th>
-            <td>
-              <input type="text" class="form-control" placeholder="Enter text to search in title" name='title' value='<%= params[:title] %>'>
-            </td>
-            <td><span class="text-left glyphicon glyphicon-remove"></span></td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>
-              <input type="text" class="form-control" placeholder="Enter text to search in description" name='description' value='<%= params[:description] %>'>
-            </td>
-            <td><span class="text-left glyphicon glyphicon-remove"></span></td>
-          </tr>
-          <tr>
-            <th >Categories</th>
-            <td>
-                <table class='table table-bordered table-condensed'>
-                  <tbody>
-                    <%- @categories.select{|c| c.is_expense}.in_groups_of(4, false) do |categories| %>
-                    <tr>
-                      <%- categories.each do |category| %>
-                        <td>
-                          <label class="checkbox-inline">
-                          <input type="checkbox" name='category_ids[]' value='<%= category.id %>' id='cat<%= category.id %>' <%= params[:category_ids].try(:include?, category.id.to_s) ? "checked" : nil %> > <%= category.name %>
-                          </label>
-                        </td>
-                      <% end %>
-                    </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-            </td>
-            <td><span class="text-left glyphicon glyphicon-remove"></span></td>
-          </tr>
-          <tr>
-            <th>Purchased by</th>
-            <td>
-               <table class='table table-bordered table-condensed'>
-                  <tbody>
-                    <%- current_user.group.users.in_groups_of(4, false) do |users| %>
-                    <tr>
-                      <%- users.each do |user| %>
-                        <td>
-                          <label class="checkbox-inline">
-                          <input type="checkbox" name='user_ids[]' value='<%= user.id %>' <%= params[:user_ids].try(:include?, user.id.to_s) ? "checked" : nil %> > <%= "#{user.first_name} #{user.last_name}" %>
-                          </label>
-                        </td>
-                      <% end %>
-                    </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-            </td>
-            <td><span class="text-left glyphicon glyphicon-remove"></span></td>
-          </tr>
-          <tr>
-            <th>Date range filter</th>
-            <td>
-              <table class='table table-bordered table-condensed'>
-                <tbody>
-                  <tr>
-                    <th class='text-center' colspan='2'>From date ... to date</th>
-                    <th class='text-center'>Exact date</th>
-                  </tr>
-                  <tr>
-                    <td><input type="text" class="text-right form-control filterDatepicker" name='from_date' value='<%= params[:from_date] %>' readonly='true'></td>
-                    <td><input type="text" class="form-control filterDatepicker" name='to_date' value='<%= params[:to_date] %>' readonly='true'></td>
-                    <td><input type="text" class="form-control filterDatepicker text-center" name='date' value='<%= params[:date] %>' readonly='true'></td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td><span class="text-left glyphicon glyphicon-remove"></span></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <button class="btn btn-info searchFormBtn" data-disable-with="Searching..." name="button" type="button">Search</button>
-              </td>
-            </td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</div>
+<%= form_tag expenses_path, method: :get, class: "form-horizontal searchForm", role: "form" do %>
+  <table class='table table-condensed'>
+    <tbody>
+      <tr>
+        <th>Title</th>
+        <td>
+          <input type="text" class="form-control" placeholder="Enter text to search in title" name='title' value='<%= params[:title] %>'>
+        </td>
+        <td><span class="text-left glyphicon glyphicon-remove"></span></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>
+          <input type="text" class="form-control" placeholder="Enter text to search in description" name='description' value='<%= params[:description] %>'>
+        </td>
+        <td><span class="text-left glyphicon glyphicon-remove"></span></td>
+      </tr>
+      <tr>
+        <th >Categories</th>
+        <td>
+            <table class='table table-bordered table-condensed'>
+              <tbody>
+                <%- @categories.select{|c| c.is_expense}.in_groups_of(4, false) do |categories| %>
+                <tr>
+                  <%- categories.each do |category| %>
+                    <td>
+                      <label class="checkbox-inline">
+                      <input type="checkbox" name='category_ids[]' value='<%= category.id %>' id='cat<%= category.id %>' <%= params[:category_ids].try(:include?, category.id.to_s) ? "checked" : nil %> > <%= category.name %>
+                      </label>
+                    </td>
+                  <% end %>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+        </td>
+        <td><span class="text-left glyphicon glyphicon-remove"></span></td>
+      </tr>
+      <tr>
+        <th>Purchased by</th>
+        <td>
+           <table class='table table-bordered table-condensed'>
+              <tbody>
+                <%- current_user.group.users.in_groups_of(4, false) do |users| %>
+                <tr>
+                  <%- users.each do |user| %>
+                    <td>
+                      <label class="checkbox-inline">
+                      <input type="checkbox" name='user_ids[]' value='<%= user.id %>' <%= params[:user_ids].try(:include?, user.id.to_s) ? "checked" : nil %> > <%= "#{user.first_name} #{user.last_name}" %>
+                      </label>
+                    </td>
+                  <% end %>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+        </td>
+        <td><span class="text-left glyphicon glyphicon-remove"></span></td>
+      </tr>
+      <tr>
+        <th>Date range filter</th>
+        <td>
+          <table class='table table-bordered table-condensed'>
+            <tbody>
+              <tr>
+                <th class='text-center' colspan='2'>From date ... to date</th>
+                <th class='text-center'>Exact date</th>
+              </tr>
+              <tr>
+                <td><input type="text" class="text-right form-control filterDatepicker" name='from_date' value='<%= params[:from_date] %>' readonly='true'></td>
+                <td><input type="text" class="form-control filterDatepicker" name='to_date' value='<%= params[:to_date] %>' readonly='true'></td>
+                <td><input type="text" class="form-control filterDatepicker text-center" name='date' value='<%= params[:date] %>' readonly='true'></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td><span class="text-left glyphicon glyphicon-remove"></span></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button class="btn btn-info searchFormBtn" data-disable-with="Searching..." name="button" type="button">Search</button>
+          </td>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
 
 <table class="table table-striped table-bordered" id="expensesTable">
   <thead>
