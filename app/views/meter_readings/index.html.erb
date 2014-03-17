@@ -39,8 +39,7 @@
   </tbody>
 </table>
 <ul class="chart">
-  <% @meter_readings.each do |meter_reading| %>
-    <%#= meter_reading.inspect %>
+  <% @meter_readings.reverse.each do |meter_reading| %>
     <li>
       <span style="height:<%= (meter_reading.reading - meter_reading.last_reading) * 2 %>%" title="<%= meter_reading.date.strftime("%b")%>"></span>
     </li>
