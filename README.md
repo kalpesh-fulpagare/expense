@@ -1,3 +1,4 @@
+
 # Rails Sample App on OpenShift #
 
 Quickstart rails application for openshift.
