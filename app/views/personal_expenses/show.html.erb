@@ -25,3 +25,4 @@
   <a href="/personal_expenses/<%= @personal_expense.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
   <a href="/personal_expenses/<%= @personal_expense.id %>" class="btn btn-sm btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 </div>
+<%= content_for :active_tab, "expenses" %>

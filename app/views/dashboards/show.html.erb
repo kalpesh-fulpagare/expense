@@ -11,11 +11,12 @@
       <th>Description</th>
       <th>Category</th>
       <th>Date</th>
-      <th>Purchased by</th>
+      <th>User</th>
       <th>Cost</th>
     </tr>
   </thead>
 </table>
+<%= content_for :active_tab, "dashboard" %>
 <%= content_for :right_sidebar do %>
   <%= render "shared/filter" %>
 <% end %>

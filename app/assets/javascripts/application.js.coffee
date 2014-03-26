@@ -20,7 +20,7 @@ addExpenses = (exp_json) ->
     table_data += "<td>" + categories_json[e.category_id][0].name + "</td>"
     cost += parseInt(e.cost)
     dt = new Date(e.date.replace(/-/g, "/"))
-    table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + " (" + days[dt.getDay()] + ")" + ", " + dt.getFullYear() + "</td>"
+    table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + ", " + dt.getFullYear() + "</td>"
 
     if resource.data('page') is "expenses" or resource.data('user') is "true"
       table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"

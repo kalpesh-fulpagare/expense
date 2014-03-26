@@ -53,9 +53,14 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li rel="dashboards"><a href="/dashboard">Dashboard</a></li>
-          <li rel="expenses"><a href="/expenses">Expenses</a></li>
-          <li rel="categories"><a href="/categories">Categories</a></li>
+          <li rel='dashboard'><a href="/">Dashboard</a></li>
+          <li rel="expenses" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Expenses <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/expenses">Group Expenses</a></li>
+              <li><a href="/personal_expenses">Personal Expenses</a></li>
+            </ul>
+          </li>
 
           <li rel="tools" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
@@ -64,11 +69,16 @@
               <li><%= link_to "Monthly Stats", "/tools/monthly_stats" %></li>
             </ul>
           </li>
-           <% if current_user.is_admin %>
-            <li rel="groups"><a href="/groups">Groups</a></li>
-            <li rel="users"><a href="/users">Users</a></li>
-          <% end %>
-          <li rel="personal_expenses"><a href="/personal_expenses">Personal Expenses</a></li>
+          <li rel="admin" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li rel="categories"><a href="/categories">Categories</a></li>
+              <% if current_user.is_admin %>
+                <li rel="groups"><a href="/groups">Groups</a></li>
+                <li rel="users"><a href="/users">Users</a></li>
+              <% end %>
+            </ul>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
