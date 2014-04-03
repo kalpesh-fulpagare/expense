@@ -1,0 +1,33 @@
+Page under construction
+
+<%= form_for @event, remote: true, :html => {role: "form", :class => 'form-horizontal' } do |f| %>
+  <%= html_errors @event %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :description, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'col-lg-2 control-label' %>
+    <div class="col-lg-10 input-group">
+      <%= f.text_field :date, class: "datepicker form-control", value: @event.date.try(:strftime, "%d-%b-%Y"), readonly: true %>
+    </div>
+  </div>
+
+
+  <div class="form-group well">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-default', disable_with: "Please wait, saving..." %>
+      <a href="/events" class="btn">Cancel</a>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,6 @@
+<% if @event.errors.any? %>
+  displayErrors("<%= j(@event.errors.messages.to_json.html_safe) %>", "event");
+<% else %>
+  <% flash[:notice] = 'Event was successfully updated.' %>
+  window.location = "<%= edit_event_path(@event) %>";
+<% end %>

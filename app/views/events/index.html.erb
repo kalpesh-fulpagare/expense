@@ -1,0 +1,31 @@
+Page under construction
+<div class="page-header">
+  <strong>Events</strong>
+  <small class='pull-right'><%= link_to "Add new event", new_event_path, class: 'btn btn-primary btn-sm pull-right' %></small>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Event Creator</th>
+      <th>Cost Settlement Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to event.id, event_path(event) %></td>
+        <td><%= event.name %></td>
+        <td><%= simple_format(event.description) %></td>
+        <td><%= event.user.display_name %></td>
+        <td><%= Event::STATUS[event.status] %></td>
+        <td>
+          <%= link_to "Edit", edit_event_path(event), class: "btn btn-info btn-sm" %>
+        </td>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @events %>

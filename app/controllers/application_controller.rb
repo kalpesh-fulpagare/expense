@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  %w(category group user meter_reading).each do |name|
+  %w(category group user meter_reading event).each do |name|
     define_method "find_#{name}" do
       obj = instance_variable_set("@#{name}", name.camelize.constantize.find_by_id(params[:id]))
       unless obj

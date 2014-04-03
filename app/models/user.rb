@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :expenses
   has_many :personal_expenses
   belongs_to :group
+  has_many :events
 
   # Callbacks
   after_save :update_cache_time
@@ -26,6 +27,14 @@ class User < ActiveRecord::Base
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.strip.downcase }]).first
+  end
+
+  def group_events params
+    Event.includes(:user).where(group_id: self.group_id).page(params[:page]).per(25)
+  end
+
+  def display_name
+    first_name + " " + last_name
   end
 
   def update_cache_time

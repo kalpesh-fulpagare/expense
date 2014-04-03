@@ -1,10 +1,6 @@
 RailsApp::Application.routes.draw do
   resources :meter_readings
-
-
   resources :groups
-
-
   authenticated :user do
     root to: "dashboards#show"
   end
@@ -17,14 +13,11 @@ RailsApp::Application.routes.draw do
   resources :personal_expenses
   resources :categories, except: [:show]
   resources :users, except: [:show] do
-    member do
-      put 'change_password'
-    end
-    collection do
-      post "invite"
-    end
+    put 'change_password', on: :member
+    post "invite", on: :collection
   end
   resource :dashboard
+  resources :events, except: [:destroy]
   resource :tools, only: [] do
     get 'monthly_stats', on: :collection
     get 'calculate_stats', on: :collection

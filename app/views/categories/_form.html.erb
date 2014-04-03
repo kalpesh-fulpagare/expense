@@ -1,5 +1,3 @@
-<%- content_for :title, "Add new Expense" %>
-
 <%= form_for @category, remote: true, :html => {role: "form", :class => 'form-horizontal' } do |f| %>
   <%= html_errors @category %>
   <div class="form-group">
