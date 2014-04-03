@@ -1,4 +1,3 @@
-Page under construction
 <div class="page-header">
   <strong>Events</strong>
   <small class='pull-right'><%= link_to "Add new event", new_event_path, class: 'btn btn-primary btn-sm pull-right' %></small>
@@ -9,7 +8,8 @@ Page under construction
       <th>id</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Event Creator</th>
+      <th>Event creator</th>
+      <th>Event total cost</th>
       <th>Cost Settlement Status</th>
       <th>Actions</th>
     </tr>
@@ -21,6 +21,7 @@ Page under construction
         <td><%= event.name %></td>
         <td><%= simple_format(event.description) %></td>
         <td><%= event.user.display_name %></td>
+        <td><%= event.total_cost %></td>
         <td><%= Event::STATUS[event.status] %></td>
         <td>
           <%= link_to "Edit", edit_event_path(event), class: "btn btn-info btn-sm" %>

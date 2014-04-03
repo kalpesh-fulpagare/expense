@@ -1,5 +1,14 @@
 <div class="page-header">
   <h1>Event details</h1>
 </div>
-
-Page under construction
+<table class='table table-bordered'>
+  <tbody>
+    <tr><th>Name</th><td><%= @event.name %></td></tr>
+    <tr><th>Description</th><td><%= simple_format(@event.description) %></td></tr>
+    <tr><th>Event total cost</th><td><%= @event.total_cost %></td></tr>
+    <tr><th>Event settlement status</th><td><%= Event::STATUS[@event.status] %></td></tr>
+    <tr><th>Event creator</th><td><%= @event.user.display_name %></td></tr>
+    <tr><th>Event Members</th><td><%= @event.participant_names.join("<br>").html_safe %></td></tr>
+    <tr><th>Per Member cost</th><td><%= number_with_precision((@event.total_cost.to_f / @event.participant_ids.count), precision: 2) %> Rs</td></tr>
+  </tbody>
+</table>

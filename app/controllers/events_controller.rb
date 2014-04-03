@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_filter :find_event, only: [:edit, :update, :show]
   before_filter :require_event_owner, only: [:edit, :update]
 
   def index
@@ -21,11 +22,11 @@ class EventsController < ApplicationController
 
   private
     def require_event_owner
-      @event = current_user.events.find_by_id params[:id]
       redirect_to root_path, alert: "Access denied" if @event.user_id != current_user.id
     end
 
     def event_params
-      params.require(:event).permit(:name, :description, :date, :total_cost)
+      params[:event][:participant_ids].try(:delete, '')
+      params.require(:event).permit(:name, :description, :date, :total_cost, participant_ids: [])
     end
 end
