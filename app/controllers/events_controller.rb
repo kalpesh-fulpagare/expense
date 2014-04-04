@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :find_event, only: [:edit, :update, :show]
+  before_filter :find_event, only: [:edit, :update, :show, :change_status]
   before_filter :require_event_owner, only: [:edit, :update]
 
   def index
@@ -18,6 +18,11 @@ class EventsController < ApplicationController
 
   def update
     @event.update_attributes event_params
+  end
+
+  def change_status
+    @event.update_attribute(:status, params[:status])
+    redirect_to events_path, notice: "Successfully changed status of event"
   end
 
   private

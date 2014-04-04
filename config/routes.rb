@@ -17,7 +17,9 @@ RailsApp::Application.routes.draw do
     post "invite", on: :collection
   end
   resource :dashboard
-  resources :events, except: [:destroy]
+  resources :events do
+    put 'change_status', on: :member
+  end
   resource :tools, only: [] do
     get 'monthly_stats', on: :collection
     get 'calculate_stats', on: :collection

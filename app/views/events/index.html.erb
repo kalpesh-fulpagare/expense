@@ -25,6 +25,11 @@
         <td><%= Event::STATUS[event.status] %></td>
         <td>
           <%= link_to "Edit", edit_event_path(event), class: "btn btn-info btn-sm" %>
+          <%- if event.status == 0 %>
+            <%= link_to "Complete Event", change_status_event_path(event, status: "1"), class: "btn btn-danger btn-sm", method: "PUT" %>
+          <%- else %>
+            <%= link_to "Change to Incomplete", change_status_event_path(event, status: "0"), class: "btn btn-success btn-sm", method: "PUT" %>
+          <% end %>
         </td>
     <% end %>
   </tbody>
