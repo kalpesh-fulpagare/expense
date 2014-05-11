@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 
-  attr_accessible :name, :user_id, :category_type
+  attr_accessible :name, :user_id, :category_type, :is_expense, :is_personal_expense
 
   # Validations
   validates :name, presence: true, uniqueness: true
