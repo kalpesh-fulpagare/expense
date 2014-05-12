@@ -13,7 +13,7 @@ class PersonalExpense < ActiveRecord::Base
     def fetch_expenses(user)
       expenses = select("id, title, description, category_id, user_id, date, cost, MONTH(date) AS month")
       expenses = expenses.where("user_id = ?", user.id) unless user.is_admin
-      expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 2 MONTH)").order("date DESC, updated_at DESC")
+      expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 5 MONTH)").order("date DESC, updated_at DESC")
       expenses
     end
   end
