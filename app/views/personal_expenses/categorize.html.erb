@@ -24,3 +24,14 @@
   </tbody>
 </table>
 <%= content_for :active_tab, "expenses" %>
+<%= content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function (argument) {
+      var total = 0;
+      $(".table td.cost").each(function(){
+        total = total + parseInt($(this).html());
+      });
+      $("table.table").append("<tr><td class='text-right' colspan='4'>Total:</td><td>"+total+"</td></tr>");
+    })
+  </script>
+<% end %>
