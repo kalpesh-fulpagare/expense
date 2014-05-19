@@ -34,7 +34,7 @@ class Expense < ActiveRecord::Base
     end
 
     def for_category(category_id, user)
-      select("id, title, description, date, cost").where(category_id: category_id).where(user_id: user.id)
+      select("id, title, description, date, cost").where(category_id: category_id).where(user_id: user.id).order("created_at DESC")
     end
 
     def find_editable_expense(id, current_user)
