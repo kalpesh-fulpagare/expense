@@ -33,15 +33,21 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def find_expense
-    @expense = Expense.find_editable_expense(params[:id], current_user)
-    unless @expense
-      flash[:alert] = "Expense not found"
-      redirect_to "/expenses"
-    end
+  def categorize
+    @category = Category.find_by_id(params[:category_id])
+    @expenses = Expense.for_category(params[:category_id], current_user)
   end
 
-  def expense_params
-    params.require(:expense).permit(:title, :description, :category_id, :cost, :date)
-  end
+  private
+    def find_expense
+      @expense = Expense.find_editable_expense(params[:id], current_user)
+      unless @expense
+        flash[:alert] = "Expense not found"
+        redirect_to "/expenses"
+      end
+    end
+
+    def expense_params
+      params.require(:expense).permit(:title, :description, :category_id, :cost, :date)
+    end
 end

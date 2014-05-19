@@ -33,6 +33,10 @@ class Expense < ActiveRecord::Base
       expenses
     end
 
+    def for_category(category_id, user)
+      select("id, title, description, date, cost").where(category_id: category_id).where(user_id: user.id)
+    end
+
     def find_editable_expense(id, current_user)
       current_user.is_admin ? find_by_id(id) : current_user.expenses.find_by_id(id)
     end

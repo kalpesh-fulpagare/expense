@@ -16,5 +16,9 @@ class PersonalExpense < ActiveRecord::Base
       expenses = expenses.where("date >= (DATE_FORMAT(CURDATE(), '%Y-%m-01') - INTERVAL 5 MONTH)").order("date DESC, updated_at DESC")
       expenses
     end
+
+    def for_category(category_id, user)
+      select("id, title, description, date, cost").where(category_id: category_id).where(user_id: user.id)
+    end
   end
 end

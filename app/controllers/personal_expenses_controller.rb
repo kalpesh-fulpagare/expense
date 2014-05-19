@@ -30,6 +30,13 @@ class PersonalExpensesController < ApplicationController
     end
   end
 
+  def categorize
+    @category = Category.find_by_id(params[:category_id])
+    @personal_expenses = PersonalExpense.for_category(params[:category_id], current_user)
+  end
+
+  private
+
   def personal_expense_params
     params.require(:personal_expense).permit(:title, :description, :category_id, :cost, :date)
   end

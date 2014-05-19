@@ -10,6 +10,7 @@
           <th>id</th>
           <th>Name</th>
           <th></th>
+          <th></th>
           <% if current_user.is_admin %>
             <th>Actions</th>
           <% end %>
@@ -20,6 +21,9 @@
           <tr>
             <td><%= link_to category.id, edit_category_path(category) %></td>
             <td><%= category.name %></td>
+            <td>
+              <%= link_to "View expenses", categorize_expense_path(category), class: "btn btn-xs btn-info" if category.is_expense %>
+              <%= link_to "View personal expenses", categorize_personal_expense_path(category), class: "btn btn-xs btn-info" if category.is_personal_expense %>
             <td>
               <label class='label label-info'><%= t("expense_#{category.is_expense}") %></label>
               <label class='label label-success'><%= t("personal_expense_#{category.is_personal_expense}") %></label>

@@ -1,0 +1,37 @@
+<div class="page-header">
+  <strong>Expenses for category <%= @category.try(:name) %></strong>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @expenses.each do |expense| %>
+      <tr>
+        <td><%= link_to expense.id, expense_path(expense) %></td>
+        <td><%= expense.title %></td>
+        <td><%= simple_format(expense.description) %></td>
+        <td><%= expense.date.strftime("%d %b, %Y") %></td>
+        <td class='cost'><%= expense.cost %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= content_for :active_tab, "expenses" %>
+<%= content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function (argument) {
+      var total = 0;
+      $(".table td.cost").each(function(){
+        total = total + parseInt($(this).html());
+      });
+      $("table.table").append("<tr><td class='text-right' colspan='4'>Total:</td><td>"+total+"</td></tr>");
+    })
+  </script>
+<% end %>

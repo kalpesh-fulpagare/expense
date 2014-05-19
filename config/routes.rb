@@ -26,6 +26,8 @@ RailsApp::Application.routes.draw do
     put 'update_stats', on: :collection
   end
   match 'users/:id/change_password' => 'users#edit'
+  match 'personal_expenses/:category_id/categorize' => 'personal_expenses#categorize', as: :categorize_personal_expense
+  match 'expenses/:category_id/categorize' => 'expenses#categorize', as: :categorize_expense
 
   # devise_for :users
   # # Devise Routes
