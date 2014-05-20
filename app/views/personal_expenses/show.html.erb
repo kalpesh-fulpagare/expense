@@ -12,7 +12,7 @@
     </tr>
     <tr>
       <td><%= @personal_expense.title %></td>
-      <td><%= @personal_expense.description %></td>
+      <td><%= simple_format(@personal_expense.description) %></td>
       <td><%= @personal_expense.category.try(:name) %></td>
       <td><%= @personal_expense.cost %></td>
       <td><%= @personal_expense.date.try(:strftime, "%d %b, %Y") %></td>
