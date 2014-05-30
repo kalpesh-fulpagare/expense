@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :find_event, only: [:edit, :update, :show, :change_status]
-  before_filter :require_event_owner, only: [:edit, :update]
+  before_filter :require_event_owner, only: [:edit, :update, :change_status]
 
   def index
     @events = current_user.is_admin ? Event.includes(:user).page(params[:page]).per(25) : current_user.group_events(params)
