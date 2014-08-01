@@ -25,6 +25,7 @@ gem 'jquery-rails', '2.2.1'
 gem 'devise', '3.0.1'
 gem 'kaminari'
 gem 'turbolinks'
+gem 'inherited_resources'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
-  before_filter :require_admin!, only: [:destroy]
-  before_filter :find_category, only: [:edit, :update, :destroy, :show]
+  before_filter :find_category, only: [:edit, :update, :show]
 
   def new
     @category = Category.new
@@ -15,14 +14,7 @@ class CategoriesController < ApplicationController
     @category.update_attributes(category_params)
   end
 
-  def destroy
-    if @category.destroy
-      redirect_to categories_path, notice: 'Category was successfully deleted.'
-    else
-      redirect_to categories_path, alert: 'Category could not be deleted.'
-    end
-  end
-
+  private
   def category_params
     params.require(:category).permit(:name, :is_expense, :is_personal_expense)
   end

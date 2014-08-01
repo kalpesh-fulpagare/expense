@@ -46,6 +46,6 @@ class User < ActiveRecord::Base
 
   private
   def welcome_email
-    UserMailer.welcome_email(self, self.tmp_password).deliver if !self.is_admin && self.tmp_password.present?
+    UserMailer.welcome_email(self, self.tmp_password).deliver if self.tmp_password.present?
   end
 end

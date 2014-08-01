@@ -1,17 +1,25 @@
 RailsApp::Application.routes.draw do
-  resources :meter_readings
-  resources :groups
+  devise_for :users, skip: [:registrations]
+  devise_for :admin, skip: [:registrations]
+
   authenticated :user do
     root to: "dashboards#show"
   end
-  devise_for :users, skip: [:registrations]
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+  authenticated :admin do
+    root to: "admin/expenses#show"
+  end
   devise_scope :user do
     root to: "devise/sessions#new"
   end
 
+  resources :meter_readings
+  resources :groups
   resources :expenses
   resources :personal_expenses
-  resources :categories, except: [:show]
+  resources :categories, except: [:show, :destroy]
   resources :users, except: [:show] do
     put 'change_password', on: :member
     post "invite", on: :collection
@@ -28,6 +36,13 @@ RailsApp::Application.routes.draw do
   match 'users/:id/change_password' => 'users#edit'
   match 'personal_expenses/:category_id/categorize' => 'personal_expenses#categorize', as: :categorize_personal_expense
   match 'expenses/:category_id/categorize' => 'expenses#categorize', as: :categorize_expense
+
+  namespace :admin do
+    resources :expenses, except: [:new, :create]
+    resources :personal_expenses, except: [:new, :create]
+    resources :categories, except: [:show]
+    resources :events, except: [:new, :create]
+  end
 
   # devise_for :users
   # # Devise Routes

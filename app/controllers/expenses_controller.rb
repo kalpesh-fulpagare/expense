@@ -25,14 +25,6 @@ class ExpensesController < ApplicationController
     @expense.update_attributes(expense_params)
   end
 
-  def destroy
-    if current_user.is_admin && @expense.destroy
-      redirect_to expenses_url, notice: "Expense deleted successfully."
-    else
-      redirect_to expenses_url, notice: "Expense could not be deleted, please try after some time."
-    end
-  end
-
   def categorize
     @category = Category.find_by_id(params[:category_id])
     @expenses = Expense.for_category(params[:category_id], current_user)

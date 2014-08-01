@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_filter :require_event_owner, only: [:edit, :update, :change_status]
 
   def index
-    @events = current_user.is_admin ? Event.includes(:user).page(params[:page]).per(25) : current_user.group_events(params)
+    @events = current_user.group_events(params)
   end
 
   def new
@@ -23,6 +23,12 @@ class EventsController < ApplicationController
   def change_status
     @event.update_attribute(:status, params[:status])
     redirect_to events_path, notice: "Successfully changed status of event"
+  end
+
+
+  def categorize
+    @category = Category.find_by_id(params[:category_id])
+    @expenses = Expense.for_category(params[:category_id], current_user)
   end
 
   private

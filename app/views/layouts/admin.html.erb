@@ -34,7 +34,7 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.png', :rel => 'shortcut icon' %>
-    <%= javascript_include_tag("application", "data-turbolinks-track" => true) %>
+    <%= javascript_include_tag("admin", "data-turbolinks-track" => true) %>
 
   </head>
   <body>
@@ -53,37 +53,18 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li rel='dashboard'><a href="/">Dashboard</a></li>
-          <li rel="expenses" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Expenses <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="/expenses">Group Expenses</a></li>
-              <li><a href="/personal_expenses">Personal Expenses</a></li>
-            </ul>
-          </li>
-
-          <li rel="tools" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li rel="meter_readings"><a href="/meter_readings">Rent Details</a></li>
-              <li><%= link_to "Monthly Stats", "/tools/monthly_stats" %></li>
-            </ul>
-          </li>
-          <li rel="admin" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li rel="categories"><a href="/categories">Categories</a></li>
-            </ul>
-          </li>
-          <li rel="events"><a href="/events">Events </a></li>
+          <li rel='admin/expenses'><a href="/">Expenses</a></li>
+          <li rel='admin/personal_expenses'><a href="/">Personal Expenses</a></li>
+          <li rel='admin/events'><a href="/">Events</a></li>
+          <li rel='admin/users'><a href="/">Users</a></li>
+          <li rel='admin/categories'><a href="/">Categories</a></li>
+        </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= display_name current_user %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-              <li><a href="/users/<%= current_user.id %>/edit">Edit Profile</a></li>
-              <li><a href="/users/<%= current_user.id %>/change_password">Change Password</a></li>
             </ul>
           </li>
         </ul>

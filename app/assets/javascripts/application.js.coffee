@@ -21,12 +21,8 @@ addExpenses = (exp_json) ->
     cost += parseInt(e.cost)
     dt = new Date(e.date.replace(/-/g, "/"))
     table_data += "<td>" + dt.getDate() + " " + months[dt.getMonth()] + ", " + dt.getFullYear() + "</td>"
-
     if resource.data('page') is "expenses" or resource.data('user') is "true"
       table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"
-    else
-      table_data += "<td>" + users_json[e.user_id][0].first_name + " " + users_json[e.user_id][0].last_name + "</td>"  if is_admin
-
     table_data += "<td class='text-right'>" + e.cost + "</td>"
     if resource.data('user') isnt undefined
       table_data += "<td><a class='btn btn-default' href='/#{resource.data('page')}/#{e.id}/edit'>Edit</a></td>"
