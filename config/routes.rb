@@ -1,15 +1,8 @@
 RailsApp::Application.routes.draw do
   devise_for :users, skip: [:registrations]
-  devise_for :admin, skip: [:registrations]
 
   authenticated :user do
     root to: "dashboards#show"
-  end
-  devise_scope :user do
-    root to: "devise/sessions#new"
-  end
-  authenticated :admin do
-    root to: "admin/expenses#show"
   end
   devise_scope :user do
     root to: "devise/sessions#new"

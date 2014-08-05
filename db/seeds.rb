@@ -14,7 +14,7 @@ SystemSetting.create(name: "cache", value: {'category' => Time.now.utc.to_s.gsub
 puts "Admin account creation ============>"
 puts "Enter password for admin account:"
 password = STDIN.gets.chomp
-u = Admin.new(first_name: "Expense", last_name: "Admin", email: "admin@expense.com", username: 'admin123', password: password)
+u = Admin.new(first_name: "Expense", last_name: "Admin", email: "admin@expense.com", username: 'admin', password: password)
 u.is_admin = true
 u.save
 puts u.errors.any? ? u.errors.full_messages : "Admin created successfully!\nLogin Credentials: admin/#{password}"
