@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
 
   # Associations
   has_many :expenses
-  has_many :users
+  belongs_to :user
 
   # Constants
   TYPES = {"exp" => "Expense", "personal_exp" => "Personal Expense"}

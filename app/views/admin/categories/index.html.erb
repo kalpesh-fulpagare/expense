@@ -1,0 +1,29 @@
+<h2>Categories <%= link_to "Add new", new_admin_category_path, class: "pull-right btn btn-default" %></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Creater</th>
+      <th>Category types</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td title="<%= category.name %>"><%= truncate(category.name, length: 20) %></td>
+        <td><%= display_name category.user %></td>
+        <td>
+          <%= '<span class="label label-primary">Expense</span>'.html_safe if category.is_expense %>
+          <%= '<span class="label label-danger">Personal Expense</span>'.html_safe if category.is_personal_expense %>
+        </td>
+        <td>
+          <%= link_to "", edit_admin_category_path(category), class: "glyphicon glyphicon-pencil" %>
+          <%= link_to "", admin_category_path(category), method: :delete, confirm: "Are you sure to delete this category?", class: "glyphicon glyphicon-trash" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

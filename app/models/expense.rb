@@ -11,6 +11,8 @@ class Expense < ActiveRecord::Base
   belongs_to :group
   belongs_to :category
 
+  delegate :name, to: :category, prefix: true, allow_nil: true
+
   class << self
     def fetch_expenses(user, params)
       expenses = select("id, title, description, category_id, user_id, date, cost")

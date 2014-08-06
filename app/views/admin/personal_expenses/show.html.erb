@@ -1,0 +1,27 @@
+<h3>Personal Expense Details</h3>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Expense Owner</th>
+      <th>Cost</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td><%= @personal_expense.title %></td>
+      <td><%= simple_format @personal_expense.description %></td>
+      <td><%= @personal_expense.category_name %></td>
+      <td><%= display_name @personal_expense.user %></td>
+      <td><%= @personal_expense.cost %></td>
+      <td><%= @personal_expense.date.try(:strftime, "%d %b, %Y") %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group well">
+  <%= link_to "<< Dashboard", admin_expenses_path, class: "btn btn-default btn-sm" %>
+  <%= link_to "Edit", edit_admin_personal_expense_path(@personal_expense), class: "btn btn-primary btn-sm" %>
+  <%= link_to "Delete", admin_personal_expense_path(@personal_expense), method: :delete, confirm: "Are you sure to delete this personal expense?", class: "btn btn-danger btn-sm" %>
+</div>

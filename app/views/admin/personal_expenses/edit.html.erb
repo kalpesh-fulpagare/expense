@@ -1,0 +1,44 @@
+<%= form_for [:admin, @personal_expense], :html => {role: "form", :class => 'validate well form-horizontal' } do |f| %>
+  <%= html_errors @personal_expense %>
+  <fieldset>
+    <legend>Edit Expense details</legend>
+    <div class="form-group">
+      <%= f.label :title, :class => 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= f.text_field :title, class: "form-control", data: {rules: {required: true}} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, :class => 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= f.text_area :description, class: "form-control", data: {rules: {required: true}} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :category_id, :class => 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+      <%= f.select(:category_id, @categories.select{|c| c.is_expense}.collect {|p| [ p.name, p.id ] }, {}, {class: "form-control"})%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :cost, :class => 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= f.text_field :cost, class: "form-control", data: {rules: {required: true}}, type: "tel" %>
+        <input class="form-control" id="expense_cost" name="expense[cost]" size="30" type="tel" value="<%= @personal_expense.cost %>">
+      </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :date, :class => 'col-lg-2 control-label' %>
+      <div class="col-lg-10">
+        <%= f.text_field :date, class: "datepicker form-control", value: @personal_expense.date.try(:strftime, "%d-%b-%Y"), readonly: true, data: {rules: {required: true}} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= f.submit "Update details", class: 'btn btn-default', data: {disable_with: "Please wait, saving..."} %>
+        <%= link_to "<< Personal Expenses", admin_personal_expenses_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

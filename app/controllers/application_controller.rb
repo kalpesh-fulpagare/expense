@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       # @categories = Rails.cache.fetch("dbCat#{system_setting.value['category']}", expires_in: 1.day) {
       #   Category.select("id, name, user_id").order("created_at DESC").to_a
       # }
-      @categories = Category.select("id, name, user_id, is_expense, is_personal_expense").order("created_at ASC")
+      @categories = Category.select("id, name, user_id, is_expense, is_personal_expense").includes(:user).order("created_at DESC")
     end
   end
 
@@ -42,6 +42,16 @@ class ApplicationController < ActionController::Base
           }
         end
       end
+    end
+  end
+
+  def after_sign_in_path_for(user)
+    if session[:user_return_to].present?
+      session[:user_return_to]
+    elsif current_user.is_admin?
+      admin_expenses_path
+    else
+      dashboard_index_path
     end
   end
 

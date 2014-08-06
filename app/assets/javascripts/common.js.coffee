@@ -1,3 +1,5 @@
+#= require jquery.validate.min
+#= require jquery.validate.additional-methods
 root = exports ? this
 flashTimer = undefined
 root.months =
@@ -65,9 +67,28 @@ root.displayErrors = (jsonErrorHash, resourceName) ->
     scrollTop: $(".errorSpan:visible").offset().top - 50
   , "slow"
 
+root.validateForms = ->
+  $("form.validate:not([novalidate])").each ->
+    formValidations =
+      errorElement: "span"
+      errorClass: "text-danger"
+      rules: {}
+      messages: {}
+
+    $(this).find("input, select, textarea").each ->
+      formValidations["rules"][$(this).attr("name")] = $(this).data("rules")  if $(this).data("rules") isnt `undefined`
+      formValidations["messages"][$(this).attr("name")] = $(this).data("messages")  if $(this).data("messages") isnt `undefined`
+      return
+
+    $(this).validate formValidations
+    return
+
+  return
+
 $(document).on "page:change", ->
   $("nav.navbar .navbar-collapse ul.nav li[rel='" + $.trim($(".activeTab").text()) + "']").addClass "active"
   hideFlash()
+  validateForms()
   $("form").submit ->
     $(this).find("errorSpan").remove()
   $("form input, form select").focus ->

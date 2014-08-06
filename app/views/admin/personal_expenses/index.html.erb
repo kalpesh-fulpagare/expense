@@ -1,0 +1,34 @@
+<h2>Users Personal Expenses</h2>
+<%= paginate @personal_expenses %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Cost</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @personal_expenses.each do |expense| %>
+      <tr>
+        <td><%= link_to "", admin_personal_expense_path(expense), class: "glyphicon glyphicon-link" %></td>
+        <td title="<%= expense.title %>"><%= truncate(expense.title, length: 20) %></td>
+        <td title="<%= expense.description %>"><%= simple_format truncate(expense.description, length: 50) %></td>
+        <td><%= expense.category_name %></td>
+        <td><%= expense.cost %></td>
+        <td><%= display_name expense.user %></td>
+        <td><%= expense.date.strftime("%d %b, %Y") %></td>
+        <td>
+          <%= link_to "", edit_admin_personal_expense_path(expense), class: "glyphicon glyphicon-pencil" %>
+          <%= link_to "", admin_personal_expense_path(expense), method: :delete, confirm: "Are you sure to delete this expense?", class: "glyphicon glyphicon-trash" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @personal_expenses %>
