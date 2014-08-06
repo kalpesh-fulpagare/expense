@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_no_admin!
+    redirect_to admin_expenses_path, alert: "Unauthorized access" if current_user && current_user.is_admin
+  end
+
   def fetch_required_items
     if current_user && !request.xhr? # && request.get?
       system_setting = SystemSetting.find_by_name("cache")

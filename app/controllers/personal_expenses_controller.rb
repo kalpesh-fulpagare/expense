@@ -1,5 +1,6 @@
 class PersonalExpensesController < ApplicationController
   before_filter :find_personal_expense, only: [:edit, :update, :destroy, :show]
+  before_filter :require_no_admin!
 
   def index
     @personal_expenses = PersonalExpense.fetch_expenses(current_user)

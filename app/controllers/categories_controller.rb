@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_filter :find_category, only: [:edit, :update, :show]
+  before_filter :require_no_admin!
 
   def new
     @category = Category.new

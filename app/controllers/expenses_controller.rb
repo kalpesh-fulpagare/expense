@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   before_filter :find_expense, only: [:edit, :update, :destroy]
-
+  before_filter :require_no_admin!
   def index
     @expenses = Expense.fetch_expenses(current_user, params)
     @users = User.select("id, first_name, last_name").where("id IN (?)", @expenses.map(&:user_id))
