@@ -48,23 +48,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Admin Panel(Expense)</a>
+        <a class="navbar-brand" href="/admin/expenses">Admin Panel(Expense)</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li rel='admin/expenses'><a href="/admin/expenses">Dashboard</a></li>
+          <li rel='admin/expenses'><a href="/admin/expenses">Expenses</a></li>
           <li rel='admin/personal_expenses'><a href="/admin/personal_expenses">Personal Expenses</a></li>
           <li rel='admin/categories'><a href="/admin/categories">Categories</a></li>
-          <li rel="expenses" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Expenses <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="/expenses">Group Expenses</a></li>
-              <li><a href="/personal_expenses">Personal Expenses</a></li>
-              <li><a href="/personal_expenses">Personal Expenses</a></li>
-            </ul>
-          </li>
-
+          <li rel="admin/events"><a href="/admin/events">Events </a></li>
           <li rel="tools" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -72,13 +64,6 @@
               <li><%= link_to "Monthly Stats", "/tools/monthly_stats" %></li>
             </ul>
           </li>
-          <li rel="admin" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li rel="categories"><a href="/categories">Categories</a></li>
-            </ul>
-          </li>
-          <li rel="events"><a href="/events">Events </a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">

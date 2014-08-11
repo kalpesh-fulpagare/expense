@@ -1,0 +1,38 @@
+<h2>Events</h2>
+<%= paginate @events %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Ereator</th>
+      <th>Total cost</th>
+      <th>Settlement Status</th>
+      <th>Group</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to "", admin_event_path(event), class: "glyphicon glyphicon-link" %></td>
+        <td title="<%= event.name %>"><%= truncate(event.name, length: 20) %></td>
+        <td title="<%= event.description %>"><%= simple_format truncate(event.description, length: 50) %></td>
+        <td><%= event.user_display_name %></td>
+        <td><%= event.total_cost %></td>
+        <td><%- if event.status %>
+            <span class="label label-success"><%= Event::STATUS[event.status] %></span>
+          <% else %>
+            <span class="label label-danger"><%= Event::STATUS[event.status] %></span>
+          <% end %>
+        </td>
+        <td title="<%= event.group_name %>"><%= truncate(event.group_name, length: 20) %></td>
+        <td>
+          <%= link_to "", edit_admin_event_path(event), class: "glyphicon glyphicon-pencil", title: "Edit event" %>
+          <%= link_to "", admin_event_path(event), method: :delete, confirm: "Are you sure to delete this event?", class: "glyphicon glyphicon-trash", title: "Delete event" %>
+        </td>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @events %>

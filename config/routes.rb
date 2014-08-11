@@ -35,6 +35,7 @@ RailsApp::Application.routes.draw do
     resources :personal_expenses, except: [:new, :create]
     resources :categories, except: [:show]
     resources :events, except: [:new, :create]
+    resources :group
   end
 
   # devise_for :users

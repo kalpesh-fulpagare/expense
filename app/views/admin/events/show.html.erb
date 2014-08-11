@@ -1,0 +1,29 @@
+<h3>Event Details</h3>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Total cost</th>
+      <th>Status</th>
+      <th>Creator</th>
+      <th>Event members</th>
+      <th>Per member cost</th>
+    </tr>
+    <tr>
+      <td><%= @event.name %></td>
+      <td><%= simple_format @event.description %></td>
+      <td><%= @event.total_cost %></td>
+      <td><%= Event::STATUS[@event.status] %></td>
+      <td><%= @event.user_display_name %></td>
+      <td><%= @event.participant_names.join("<br>").html_safe %></td>
+      <td><%= number_with_precision((@event.total_cost.to_f / @event.participant_ids.count), precision: 2) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group well">
+  <%= link_to "<< Events", admin_events_path, class: "btn btn-default btn-sm" %>
+  <%= link_to "Edit", edit_admin_event_path(@event), class: "btn btn-primary btn-sm" %>
+  <%= link_to "Delete", admin_event_path(@event), method: :delete, confirm: "Are you sure to delete this event?", class: "btn btn-danger btn-sm" %>
+</div>
