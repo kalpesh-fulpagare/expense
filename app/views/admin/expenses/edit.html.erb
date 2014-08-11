@@ -1,7 +1,7 @@
 <%= form_for [:admin, @expense], :html => {role: "form", :class => 'validate well form-horizontal' } do |f| %>
   <%= html_errors @expense %>
   <fieldset>
-    <legend>Edit Expense details</legend>
+    <h3 class="col-lg-offset-2">Edit Expense details</h3>
     <div class="form-group">
       <%= f.label :title, :class => 'col-lg-2 control-label' %>
       <div class="col-lg-10">
@@ -36,7 +36,7 @@
     <div class="form-group">
       <div class="col-lg-offset-2 col-lg-10">
         <%= f.submit "Update details", class: 'btn btn-default', data: {disable_with: "Please wait, saving..."} %>
-        <%= link_to "<< Dashboard", admin_expenses_path, class: "btn btn-primary" %>
+        <%= link_to "<< Expenses", admin_expenses_path, class: "btn btn-primary" %>
       </div>
     </div>
   </fieldset>
