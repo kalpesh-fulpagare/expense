@@ -36,6 +36,7 @@ RailsApp::Application.routes.draw do
     resources :categories, except: [:show]
     resources :events, except: [:new, :create]
     resources :group
+    resources :system_settings
   end
 
   # devise_for :users

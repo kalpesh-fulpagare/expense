@@ -41,7 +41,6 @@ gem 'inherited_resources'
 
 # To use debugger
 group :development do
-  gem 'debugger'
   gem 'thin'
   gem 'meta_request'
 end

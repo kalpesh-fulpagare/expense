@@ -1,0 +1,23 @@
+<h2>System Settongs</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @system_settings.each do |ss| %>
+      <tr>
+        <td><%= link_to "", admin_system_settings_path(ss), class: "glyphicon glyphicon-link" %></td>
+        <td><%= ss.name %></td>
+        <td title="<%= ss.value %>"><%= ss.value %></td>
+        <td>
+          <%= link_to "", edit_admin_system_setting_path(ss), class: "glyphicon glyphicon-pencil", title: "Edit event" %>
+          <%= link_to "", admin_system_settings_path(ss), method: :delete, confirm: "Are you sure to delete this setting?", class: "glyphicon glyphicon-trash", title: "Delete event" %>
+        </td>
+    <% end %>
+  </tbody>
+</table>

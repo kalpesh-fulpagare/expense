@@ -11,6 +11,7 @@ Group.destroy_all
 Category.destroy_all
 SystemSetting.destroy_all
 SystemSetting.create(name: "cache", value: {'category' => Time.now.utc.to_s.gsub!(/[ : +-]+/,'_'), 'group' => Time.now.utc.to_s.gsub!(/[ : +-]+/,'_'), 'user' => Time.now.utc.to_s.gsub!(/[ : +-]+/,'_')})
+SystemSetting.create(name: "RoomRent", value: {'Unit' => '8', 'Rent' => '6100'})
 puts "Admin account creation ============>"
 puts "Enter password for admin account:"
 password = STDIN.gets.chomp
