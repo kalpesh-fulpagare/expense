@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.is_admin?
       admin_expenses_path
     else
-      dashboard_index_path
+      "/dashboard"
     end
   end
 
