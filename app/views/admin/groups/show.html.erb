@@ -1,0 +1,22 @@
+<h3>Group detail</h3>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Users</th>
+    </tr>
+    <tr>
+      <td><%= @group.name %></td>
+      <td>
+        <%- @group.users.each do |u| %>
+          <%= link_to display_name(u), admin_user_path(u) %><br>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group well">
+  <%= link_to "<< Groups", admin_groups_path, class: "btn btn-default btn-sm" %>
+  <%= link_to "Edit", edit_admin_group_path(@group), class: "btn btn-primary btn-sm" %>
+</div>

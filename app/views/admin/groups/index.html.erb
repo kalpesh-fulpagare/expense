@@ -1,0 +1,23 @@
+<h2>Groups <%= link_to "Add new", new_admin_group_path, class: "pull-right btn btn-default" %></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Users</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= link_to "", admin_group_path(group), class: "glyphicon glyphicon-link" %></td>
+        <td><%= group.name %></td>
+        <td>
+          <%- group.users.each do |u| %> <%= link_to display_name(u), admin_user_path(u) %> <% end %>
+        </td>
+        <td><%= link_to "", edit_admin_group_path(group), class: "glyphicon glyphicon-pencil" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
