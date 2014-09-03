@@ -1,0 +1,25 @@
+<h3>User detail</h3>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Email</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Username</th>
+      <th>Group</th>
+    </tr>
+    <tr>
+      <td><%= @user.email %></td>
+      <td><%= @user.first_name %></td>
+      <td><%= @user.last_name %></td>
+      <td><%= @user.username %></td>
+      <td><%= @user.group_name %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group well">
+  <%= link_to "<< Users", admin_users_path, class: "btn btn-default btn-sm" %>
+  <%= link_to "Edit", edit_admin_user_path(@user), class: "btn btn-primary btn-sm" %>
+  <%= link_to "Delete", admin_user_path(@user), method: :delete, confirm: "Are you sure to delete this expense?", class: "btn btn-danger btn-sm" %>
+</div>

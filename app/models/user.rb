@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   after_save :update_cache_time
   after_create :welcome_email
 
+  delegate :name, to: :group, prefix: true, allow_nil: true
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)

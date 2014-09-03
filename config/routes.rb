@@ -35,9 +35,14 @@ RailsApp::Application.routes.draw do
     resources :personal_expenses, except: [:new, :create]
     resources :categories, except: [:show]
     resources :events, except: [:new, :create]
-    resources :group
+    resources :groups, except: [:destroy]
+    resources :users do
+      put 'update_profile', on: :collection
+    end
     resources :system_settings
   end
+
+  match 'admin/change_password/:id' => 'admin/users#edit', as: :change_password_admin_users
 
   # devise_for :users
   # # Devise Routes

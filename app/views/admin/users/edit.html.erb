@@ -1,0 +1,68 @@
+<%- if request.url.include?("change_password") || request.url.include?("profile") %>
+
+  <%= form_tag update_profile_admin_users_path, method: :put, role: "form", class: 'validate well form-horizontal' do |f| %>
+    <%= html_errors current_user %>
+    <fieldset>
+      <h3 class="col-lg-offset-2">Change password</h3>
+      <div class="form-group">
+        <label class="col-lg-2 control-label" for="user_current_password">Current password</label>
+        <div class="col-lg-10">
+          <%= password_field :user, :current_password, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label" for="user_password">New Password</label>
+        <div class="col-lg-10">
+          <%= password_field :user, :password, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label" for="user_current_password">Retype new Password</label>
+        <div class="col-lg-10">
+          <%= password_field :user, :password_confirmation, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <%= submit_tag "Change password", class: 'btn btn-default', data: {disable_with: "Please wait, saving..."} %>
+          <%= link_to "<< Back to Expenses", admin_expenses_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+
+<% else %>
+
+  <%= form_for @user, html: { class: 'form-horizontal validate' } do |f| %>
+    <%= html_errors @user %>
+    <fieldset>
+      <h3 class="col-lg-offset-2">Update profile</h3>
+      <div class="form-group">
+        <%= f.label :first_name, :class => 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.text_field :first_name, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, :class => 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.text_field :last_name, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :username, :class => 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.text_field :username, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <%= submit_tag "Update details", class: 'btn btn-default', data: {disable_with: "Please wait, saving..."} %>
+          <%= link_to "<< Back to Users", admin_users_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,30 @@
+<h2>Users <%= link_to "Add new", new_admin_user_path, class: "pull-right btn btn-default" %></h2>
+<%= paginate @users %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to "", admin_user_path(user), class: "glyphicon glyphicon-link" %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= link_to "", edit_admin_user_path(user), class: "glyphicon glyphicon-pencil" %>
+          <%= link_to "", admin_user_path(user), method: :delete, confirm: "Are you sure to delete this user?", class: "glyphicon glyphicon-trash" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @users %>
