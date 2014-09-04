@@ -5,6 +5,19 @@
 #= require filter.js
 #= require turbolinks
 #= require datepicker
+#= require nanobar.min
+intr = null
+perc = 0
+nanobar = null
+options =
+  bg: "#acf"
+  target: document.getElementById("nanoBarHolder")
+  id: "nanoBar"
+
+$(document).on "ready page:load", ->
+  nanobar = new Nanobar(options)
+  return
+
 addExpenses = (exp_json) ->
   $("#expensesTable").find("tr").not(".thHeads").remove()
   table_data = ""
@@ -36,9 +49,19 @@ $(document).on "page:change", ->
   # Page Reload JS
   $(document).off "page:fetch"
   $(document).on "page:fetch", ->
-    $(".pageSpinner").show()
+    clearInterval intr
+    intr = setInterval(->
+      if perc == 100
+        $(".pageSpinner").show()
+      else
+        perc += 5
+        nanobar.go perc
+      return
+    , 70)
   $(document).on "page:receive", ->
+    clearInterval intr
     $(".pageSpinner").hide()
+    nanobar.go 100
 
   # Datepicker Code
   if $(".datepicker").length isnt 0
