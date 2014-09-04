@@ -37,6 +37,7 @@ $(document).on "page:change", ->
     clearInterval intr
     $(".pageSpinner").hide()
     nanobar.go 100
+    perc = 0
 
   # Datepicker Code
   if $(".datepicker").length isnt 0
