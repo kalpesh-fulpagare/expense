@@ -15,7 +15,7 @@ class Expense < ActiveRecord::Base
 
   class << self
     def fetch_expenses(user, params)
-      expenses = select("id, title, description, category_id, user_id, date, cost")
+      expenses = select("id, title, description, category_id, user_id, date, cost").includes(:user, :category)
       expenses = expenses.where(group_id: user.group_id) if user.group_id.present?
       expenses = expenses.where(category_id: params[:category_ids]) if params[:category_ids].present?
       expenses = expenses.where(user_id: params[:user_ids]) if params[:user_ids].present?

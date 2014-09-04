@@ -19,6 +19,7 @@ $(document).on "ready page:load", ->
   return
 
 addExpenses = (exp_json) ->
+  console.log("called")
   $("#expensesTable").find("tr").not(".thHeads").remove()
   table_data = ""
   category_name = undefined
