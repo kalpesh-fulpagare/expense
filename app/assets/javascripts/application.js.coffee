@@ -10,7 +10,7 @@ intr = null
 perc = 0
 nanobar = null
 options =
-  bg: "#acf"
+  bg: "#3071a9"
   target: document.getElementById("nanoBarHolder")
   id: "nanoBar"
 
