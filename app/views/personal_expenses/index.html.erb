@@ -27,7 +27,7 @@
     categories_json = <%= @categories.group_by(&:id).to_json.html_safe %>
   </script>
 <% end %>
-<%= content_for :active_tab, "expenses" %>
+<%= content_for :active_tab, "personal_expenses" %>
 <%= content_for :javascript do %>
   <script type="text/javascript">
     $(document).ready(function (argument) {
