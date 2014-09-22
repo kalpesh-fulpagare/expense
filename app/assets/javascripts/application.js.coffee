@@ -5,18 +5,6 @@
 #= require filter.js
 #= require turbolinks
 #= require datepicker
-#= require nanobar.min
-intr = null
-perc = 0
-nanobar = null
-options =
-  bg: "#3071a9"
-  target: document.getElementById("nanoBarHolder")
-  id: "nanoBar"
-
-$(document).on "ready page:load", ->
-  nanobar = new Nanobar(options)
-  return
 
 addExpenses = (exp_json) ->
   console.log("called")
@@ -48,32 +36,6 @@ addExpenses = (exp_json) ->
 
 $(document).on "page:change", ->
   # Page Reload JS
-  $(document).off "page:fetch"
-  $(document).on "page:fetch", ->
-    clearInterval intr
-    intr = setInterval(->
-      if perc == 100
-        $(".pageSpinner").show()
-      else
-        perc += 5
-        nanobar.go perc
-      return
-    , 70)
-  $(document).on "page:receive", ->
-    clearInterval intr
-    $(".pageSpinner").hide()
-    nanobar.go 100
-    perc = 0
-
-  # Datepicker Code
-  if $(".datepicker").length isnt 0
-    $(".datepicker").datepicker
-      format: "dd-M-yyyy"
-      endDate: "+0d"
-      startDate: "-30d"
-      autoclose: true
-      todayHighlight: true
-
   # Expense JS
   if $("#expensesTable").length isnt 0
     addExpenses expenses_json
